@@ -161,7 +161,16 @@
     function saveData(){data.activeProfile=activeProfile;localStorage.setItem(STORAGE_KEY,JSON.stringify(data))}
     function profileData(id=activeProfile){return data.profiles[id]||(data.profiles[id]=emptyProfile())}
     function setProfile(id){activeProfile=id;document.querySelectorAll('.profile').forEach(button=>button.classList.toggle('active',button.dataset.profile===id));document.getElementById('welcomeTitle').textContent=`${profileNames[id]}，今日想玩邊樣？`;document.getElementById('welcomeText').textContent='你嘅進度同錯題會獨立保存。';saveData();updateBadges()}
-    function updateBadges(){document.querySelectorAll('[data-badge]').forEach(badge=>{const count=activeProfile?profileData().wrong[badge.dataset.badge].length:0;badge.textContent=`錯題 ${count}`})}
+    const sentenceKey=profile=>'chinese-learning-games:sentence:'+profile;
+    function sentenceStats(profile){
+      try{return JSON.parse(localStorage.getItem(sentenceKey(profile)))||{}}
+      catch{return {}}
+    }
+    function resetSentence(profile,wrongOnly=false){
+      if(wrongOnly)localStorage.setItem(sentenceKey(profile),JSON.stringify({...sentenceStats(profile),wrong:[]}));
+      else localStorage.removeItem(sentenceKey(profile));
+    }
+    function updateBadges(){document.querySelectorAll('[data-badge]').forEach(badge=>{const game=badge.dataset.badge;const count=!activeProfile?0:game==='sentence'?(sentenceStats(activeProfile).wrong?.length||0):profileData().wrong[game].length;badge.textContent=`錯題 ${count}`})}
     function wrongIds(game=currentGame){return profileData().wrong[game]}
     function addWrong(id){const list=wrongIds();if(!list.includes(id))list.push(id);saveData()}
     function removeWrong(id){profileData().wrong[currentGame]=wrongIds().filter(item=>item!==id);saveData()}
@@ -176,23 +185,30 @@
 
     document.querySelectorAll('.profile').forEach(button=>button.onclick=()=>setProfile(button.dataset.profile));
     document.querySelectorAll('.game').forEach(button=>button.onclick=()=>startGame(button.dataset.game));
+    document.querySelector('[data-game="sentence"]').onclick=()=>{
+      if(!activeProfile){startGame('sentence');return}
+      location.href='sentence/?profile='+activeProfile;
+    };
     document.getElementById('backButton').onclick=returnHome;
     document.querySelectorAll('[data-mode]').forEach(button=>button.onclick=()=>{currentMode=button.dataset.mode;document.querySelectorAll('[data-mode]').forEach(item=>item.classList.toggle('active',item===button));buildQueue();renderQuestion()});
     document.querySelectorAll('[data-listen-mode]').forEach(button=>button.onclick=()=>{listenMode=button.dataset.listenMode;document.querySelectorAll('[data-listen-mode]').forEach(item=>item.classList.toggle('active',item===button));buildQueue();renderQuestion()});
 
     function openParent(){parentProfile=activeProfile||'elder';document.querySelectorAll('[data-parent-profile]').forEach(button=>button.classList.toggle('active',button.dataset.parentProfile===parentProfile));renderParent();document.getElementById('parentDialog').showModal()}
-    function renderParent(){const state=profileData(parentProfile);document.getElementById('parentSummary').innerHTML=Object.entries(gameNames).map(([id,name])=>`<div class="summary-item">${name}<span>完成 ${state.completed[id]} 次 · 錯題 ${state.wrong[id].length} 題</span></div>`).join('');document.getElementById('gameResetButtons').innerHTML=Object.entries(gameNames).map(([id,name])=>`<button class="reset-button" data-reset-game="${id}">重設「${name}」</button>`).join('');document.querySelectorAll('[data-reset-game]').forEach(button=>button.onclick=()=>resetGame(button.dataset.resetGame));document.getElementById('parentStatus').textContent=''}
-    function resetGame(game){const state=profileData(parentProfile);state.wrong[game]=[];state.completed[game]=0;saveData();renderParent();document.getElementById('parentStatus').textContent=`已重設${profileNames[parentProfile]}嘅「${gameNames[game]}」。`;updateBadges()}
+    function renderParent(){const state=profileData(parentProfile);const sentence=sentenceStats(parentProfile);document.getElementById('parentSummary').innerHTML=Object.entries(gameNames).map(([id,name])=>`<div class="summary-item">${name}<span>完成 ${id==='sentence'?(sentence.done||0):state.completed[id]} 次 · 錯題 ${id==='sentence'?(sentence.wrong?.length||0):state.wrong[id].length} 題</span></div>`).join('');document.getElementById('gameResetButtons').innerHTML=Object.entries(gameNames).map(([id,name])=>`<button class="reset-button" data-reset-game="${id}">重設「${name}」</button>`).join('');document.querySelectorAll('[data-reset-game]').forEach(button=>button.onclick=()=>resetGame(button.dataset.resetGame));document.getElementById('parentStatus').textContent=''}
+    function resetGame(game){if(game==='sentence')resetSentence(parentProfile);const state=profileData(parentProfile);state.wrong[game]=[];state.completed[game]=0;saveData();renderParent();document.getElementById('parentStatus').textContent=`已重設${profileNames[parentProfile]}嘅「${gameNames[game]}」。`;updateBadges()}
     const parentButton=document.getElementById('parentButton');
     function startHold(event){event.preventDefault();holdTimer=setTimeout(openParent,2000)}
     function cancelHold(){clearTimeout(holdTimer)}
     parentButton.addEventListener('pointerdown',startHold);parentButton.addEventListener('pointerup',cancelHold);parentButton.addEventListener('pointerleave',cancelHold);parentButton.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();openParent()}});
     document.getElementById('closeDialog').onclick=()=>document.getElementById('parentDialog').close();
     document.querySelectorAll('[data-parent-profile]').forEach(button=>button.onclick=()=>{parentProfile=button.dataset.parentProfile;document.querySelectorAll('[data-parent-profile]').forEach(item=>item.classList.toggle('active',item===button));renderParent()});
-    document.getElementById('clearWrong').onclick=()=>{const state=profileData(parentProfile);Object.keys(gameNames).forEach(game=>state.wrong[game]=[]);saveData();renderParent();document.getElementById('parentStatus').textContent=`已清除${profileNames[parentProfile]}嘅全部錯題。`;updateBadges()};
-    document.getElementById('clearAll').onclick=()=>{if(!confirm(`確定清除${profileNames[parentProfile]}嘅全部進度同錯題？`))return;data.profiles[parentProfile]=emptyProfile();saveData();renderParent();document.getElementById('parentStatus').textContent=`已重新開始${profileNames[parentProfile]}嘅全部練習。`;updateBadges()};
+    document.getElementById('clearWrong').onclick=()=>{resetSentence(parentProfile,true);const state=profileData(parentProfile);Object.keys(gameNames).forEach(game=>state.wrong[game]=[]);saveData();renderParent();document.getElementById('parentStatus').textContent=`已清除${profileNames[parentProfile]}嘅全部錯題。`;updateBadges()};
+    document.getElementById('clearAll').onclick=()=>{if(!confirm(`確定清除${profileNames[parentProfile]}嘅全部進度同錯題？`))return;resetSentence(parentProfile);data.profiles[parentProfile]=emptyProfile();saveData();renderParent();document.getElementById('parentStatus').textContent=`已重新開始${profileNames[parentProfile]}嘅全部練習。`;updateBadges()};
 
-    if(activeProfile)setProfile(activeProfile);else updateBadges();
+    const returningProfile=new URLSearchParams(location.search).get('profile');
+    if(returningProfile==='elder'||returningProfile==='younger')setProfile(returningProfile);
+    else if(activeProfile)setProfile(activeProfile);else updateBadges();
+    window.addEventListener('pageshow',updateBadges);
   </script>
 </body>
 </html>

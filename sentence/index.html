@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<meta name="theme-color" content="#eef6ff">
+<title>句子小探險 V3｜廣東話重組句子</title>
+<style>
+:root{--ink:#1f3447;--muted:#5c7182;--blue:#1e6dba;--blue-2:#e7f3ff;--cream:#fffcf2;--green:#16846c;--red:#aa4d39;--card:#fff;--line:#d5e3eb;--shadow:0 8px 26px rgba(35,76,117,.085)}
+*{box-sizing:border-box}html{height:100%;-webkit-text-size-adjust:100%}body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"PingFang HK","Noto Sans TC","Microsoft JhengHei",sans-serif;color:var(--ink);background:linear-gradient(150deg,#e9f5ff,#fff8e7 72%)}button,select{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible,select:focus-visible{outline:3px solid #f0a43b;outline-offset:3px}main{width:min(940px,calc(100% - 28px));margin:0 auto;padding:22px 0 42px}header{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:11px}.logo{height:55px;width:55px;display:grid;place-items:center;border-radius:16px;background:#fff;box-shadow:var(--shadow);font-size:30px}h1{margin:0;font-size:clamp(24px,4vw,32px);letter-spacing:.03em}header p{margin:3px 0 0;color:var(--muted);font-size:14px}.tag{background:#fff;padding:8px 12px;border-radius:20px;color:var(--blue);font-size:13px;font-weight:750;border:1px solid #d8e8fa}.panel{background:rgba(255,255,255,.91);border:1px solid rgba(210,225,235,.9);box-shadow:var(--shadow);border-radius:23px;padding:22px;margin-top:18px}.settings{display:flex;flex-wrap:wrap;align-items:end;gap:12px}.setting{display:flex;flex-direction:column;gap:5px;min-width:155px;flex:1}.setting label{color:var(--muted);font-size:13px;font-weight:700}.setting select{padding:11px 12px;border-radius:11px;border:1px solid var(--line);background:white;min-width:0;color:var(--ink);font-size:16px}.setting.voice-test{flex:0 1 165px;min-width:130px}.btn{border:0;border-radius:13px;background:var(--blue);color:#fff;font-weight:750;padding:12px 16px;min-height:45px;box-shadow:0 3px 0 rgba(18,75,130,.1)}.btn:disabled{opacity:.45;cursor:default}.btn.secondary{background:var(--blue-2);color:var(--blue);box-shadow:none}.btn.light{background:#f5f7f9;color:var(--ink);border:1px solid #dbe5eb;box-shadow:none}.btn.gold{background:#e69c24;color:#30200b}.btn.green{background:var(--green)}.btn.full{width:100%}.voice-message{font-size:13px;color:var(--muted);margin:10px 1px 0;line-height:1.45}.status{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:13px}.pill{padding:6px 10px;border-radius:99px;background:#eff5fa;color:#45647b;font-size:13px;font-weight:700}.pill.primary{background:#dbeeff;color:#075b9d}.progress{margin-left:auto;font-size:13px;color:#637b8c}.question-title{font-size:clamp(19px,3vw,23px);margin:8px 0 5px;font-weight:800}.help{font-size:15px;color:var(--muted);margin:0;line-height:1.65}.two-actions{display:flex;gap:9px;flex-wrap:wrap;margin:17px 0}.section-h{font-size:15px;font-weight:800;color:#365e7b;display:flex;align-items:center;justify-content:space-between;margin:20px 0 11px}.bank{display:flex;flex-wrap:wrap;align-content:flex-start;gap:10px;padding:19px 16px;min-height:122px;background:var(--cream);border:2px dashed #e7d5aa;border-radius:18px}.tile{min-width:65px;min-height:64px;display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:9px 14px;font-size:clamp(22px,3.5vw,29px);font-weight:780;white-space:nowrap;color:var(--ink);background:#fff;border:2px solid #d4e3ed;border-bottom-width:5px;border-radius:14px;user-select:none;-webkit-user-select:none;touch-action:none;-webkit-touch-callout:none;position:relative;transition:box-shadow .12s,border-color .12s}.tile:active{background:#f3faff}.tile.dragsource{opacity:.25}.tile .tiny-sound{position:absolute;top:3px;right:4px;font-size:11px;opacity:.52}.slotrow{display:flex;flex-wrap:wrap;gap:9px;padding:17px 13px;min-height:128px;align-items:center;background:#eef8fc;border:2px dashed #9cc7db;border-radius:18px}.slot{min-height:77px;min-width:74px;max-width:100%;flex:1 0 auto;display:flex;align-items:center;justify-content:center;border:2px dashed #a9c6d8;border-radius:13px;color:#83a1b2;font-size:19px;font-weight:650;background:#fff9;position:relative}.slot.filled{border:0;background:transparent}.slot.filled .tile{border-color:#8fbadf;box-shadow:0 4px 10px #b5d4ef33}.slot.can-drop{outline:3px solid #40b4b3;outline-offset:2px;background:#d8f8e8}.slot-num{position:absolute;top:3px;left:5px;font-size:11px;color:#8495a0}.bank.can-drop{outline:3px solid #40b4b3;outline-offset:2px}.drag-ghost{position:fixed;z-index:10000;pointer-events:none;transform:translate(-50%,-70%);box-shadow:0 14px 28px #3c628866;opacity:.95;background:#fffbed;border-color:#e39c3d}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:17px}.actions .btn{flex:1 1 145px}.feedback{border-radius:16px;padding:17px 18px;margin-top:17px;line-height:1.7;border:1px solid #cddfec;background:#f5faff}.feedback.good{border-color:#b1dfca;background:#effaf3}.feedback.bad{border-color:#efceaf;background:#fff7ec}.feedback strong{font-size:18px}.feedback p{margin:9px 0 0}.answer{font-size:clamp(20px,3.3vw,27px);font-weight:820;letter-spacing:.025em;margin-top:7px}.feedback .btn{margin-top:12px}.muted{color:var(--muted)}.stats{display:flex;gap:12px;flex-wrap:wrap}.stat{flex:1;min-width:110px;text-align:center;background:#f6faff;border-radius:14px;padding:13px 8px}.stat b{display:block;font-size:26px;color:#27649a}.stat small{font-size:13px;color:#637687}.footer{margin-top:15px;color:#5f7482;line-height:1.7;font-size:13px}.footer summary{cursor:pointer;font-weight:700}.warn{color:#87571e}.explain-chip{display:inline-block;padding:2px 8px;background:#e6f2fa;border-radius:8px;margin:2px}.preview-note{margin:0;align-self:center;line-height:1.6;font-size:16px;color:#87571e}.hidden{display:none!important}#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:20000;max-width:calc(100vw - 30px);background:#24394d;color:white;padding:12px 18px;border-radius:14px;font-size:15px;box-shadow:var(--shadow);display:none;pointer-events:none;text-align:center}@media (max-width:580px){main{width:calc(100% - 18px);padding-top:12px}.panel{padding:15px;border-radius:18px}.tile{font-size:22px;min-height:58px;min-width:60px;padding:8px 10px}.slot{min-height:67px;min-width:65px}.slotrow,.bank{gap:7px;padding:12px 9px}.setting{min-width:130px}.progress{margin-left:0}.btn{padding:10px 12px}}@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="brand"><div class="logo" aria-hidden="true">🧩</div><div><h1>句子小探險</h1><p>聽廣東話・玩詞語卡・學識排句子</p></div></div>
+  <span class="tag">iPad 練習版 V3</span>
+</header>
+<nav aria-label="遊戲導覽" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-top:14px"><a id="hubLink" href="../index.html" class="btn secondary">← 返回中文學習樂園</a><strong id="playerLabel"></strong></nav>
+<section class="panel" aria-label="練習設定">
+  <div class="settings">
+    <div class="setting"><label for="mode">遊戲模式</label><select id="mode"><option value="practice">🌱 基礎練習（詞語＋意思）</option><option value="exam">📝 模擬考試（只讀詞語）</option></select></div>
+    <div class="setting"><label for="difficulty">字卡數量（包括標點）</label><select id="difficulty"><option value="auto">自動升級：4 → 7</option><option value="4">4 張字卡</option><option value="5">5 張字卡</option><option value="6">6 張字卡</option><option value="7">7 張字卡</option></select></div>
+    <div class="setting"><label for="kind">題目來源</label><select id="kind"><option value="all">課本＋新句子</option><option value="book">只做課本例題</option><option value="new">只做新組合</option><option value="wrong">專練做錯嘅題目</option></select></div>
+    <div class="setting voice-test"><label>語音測試</label><button type="button" class="btn secondary" id="testVoice">🔊 試聽廣東話</button></div>
+  </div>
+  <p class="voice-message" id="voiceStatus" role="status">語音由 iPad 內置朗讀功能提供；第一次請撳「試聽廣東話」。</p>
+</section>
+<section class="panel" aria-label="重組句子遊戲">
+  <div class="status"><span class="pill primary" id="levelPill">4 張字卡</span><span class="pill" id="originPill">課本例題</span><span class="pill" id="topicPill">主題</span><span class="progress" id="progressText">準備開始</span></div>
+  <div class="question-title">將啲字卡排成一句通順嘅句子</div>
+  <p class="help">👆 輕按字卡：聽讀音　　✋ 長按約半秒，再拖去下面：排句子</p>
+  <div class="two-actions"><button type="button" id="readProblem" class="btn secondary">🔊 老師讀題</button><button type="button" id="replay" class="btn light">🐢 慢速讀字</button></div>
+  <div class="section-h"><span>① 打亂咗嘅字卡</span><span class="muted" id="remaining"></span></div>
+  <div id="pool" class="bank" aria-label="詞語卡區域"><p class="preview-note">⚠️ 遊戲未啟動。你可能喺 iPad「檔案預覽」睇緊 HTML，預覽唔會執行互動遊戲。請用 Safari 開啟已發佈嘅遊戲網址。</p></div>
+  <div class="section-h"><span>② 拖去呢度排好次序</span><span class="muted">由左至右讀</span></div>
+  <div id="slots" class="slotrow" aria-label="答案區域"><span class="preview-note">等待遊戲啟動……</span></div>
+  <div class="actions"><button type="button" class="btn light" id="clear">↩️ 重新排過</button><button type="button" class="btn" id="check">✅ 檢查答案</button><button type="button" class="btn green" id="next">👀 睇答案，再下一題</button></div>
+  <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+</section>
+<section class="panel" aria-label="進度紀錄">
+  <div class="section-h" style="margin-top:0">⭐ 我的練習紀錄 <button type="button" class="btn secondary" id="reviewWrong" style="min-height:35px;padding:6px 12px;font-size:13px">重練錯題</button></div>
+  <div class="stats"><div class="stat"><b id="attemptStat">0</b><small>完成題目</small></div><div class="stat"><b id="firstStat">0%</b><small>第一次答啱</small></div><div class="stat"><b id="streakStat">0</b><small>連續答啱</small></div><div class="stat"><b id="wrongStat">0</b><small>待重練錯題</small></div></div>
+  <details class="footer"><summary>家長說明、使用方法同語音設定</summary>
+    <p>本遊戲參考你提供嘅小一繁體中文練習相，收錄課本例題及使用相關詞語編寫、經人手檢查嘅新句子。呢批資料未確認係學校正式考試嘅完整詞庫；你日後可以用考試範圍再更新。</p>
+    <p><strong>iPad 特別注意：</strong>直接喺「檔案」App 預覽 HTML 只會睇到靜態畫面，唔會玩到。要透過 Safari 開啟由網頁伺服器提供嘅地址。發佈後直接用 Safari 開啟遊戲網址；亦可以由分享選單加入主畫面。</p><p>撳字卡會讀詞語；「基礎練習」亦會講簡單意思。長按後將字卡拖去答案行；已排好嘅字卡亦可以長按重新調位，或者拖返上去。放滿後撳「檢查答案」，每題都會用語音講解句子各部分點樣連起嚟，唔論答啱定答錯，亦可以慢速重聽。題庫目前只收錄部分已核對嘅其他排法；遇到合理答案未被接受，請家長協助核對。如果唔識做，可以隨時撳「睇答案，再下一題」；系統會先用語音示範答案，之後先可以轉下一題。</p>
+    <p>語音係透過 Safari 的內置語音功能，無需網絡服務或 API Key。<strong>必須有廣東話聲線先可以確保係粵語發音。</strong>如果「試聽」讀成普通話、冇聲或冇廣東話聲線，請到 iPad「設定 → 輔助使用 → 朗讀內容／朗讀與語音 → 聲音」，檢查有冇中文（香港）聲線；不同 iPadOS 版本名稱可能唔同。首次朗讀通常要先輕按畫面授權。建議開啟音量，同埋唔好用靜音模式。</p>
+    <p>練習成績只儲存喺目前瀏覽器的本機儲存空間；清除 Safari 網站資料可能會遺失進度。冇廣告、登入、上傳答案或者第三方追蹤。</p>
+  </details>
+</section>
+</main><div id="toast" role="status"></div>
+<script>
+(()=>{'use strict';
+const raw=[];
+function add(tokens,origin,topic,why,page=''){raw.push({id:'q'+(raw.length+1),tokens:tokens.split('|'),origin,topic,why,page});}
+// 取材自家長提供的練習相。每道句子由人手核對，非任意拼接。
+add("郵差|天天|送信|。","book","工作","先問：邊個送信？係「郵差」。再問：幾時送？係「天天」。將「天天」放喺「送信」前面，就講清楚郵差每日都送信。「天天郵差送信」亦講得通，時間唔一定要放喺句首。最後放句號，表示呢句講完。","p.9");
+add("我有|一棵|聖誕樹|。","book","聖誕節","先用「我有」講自己擁有嘢，再答：有乜嘢？係「一棵聖誕樹」。「一棵」要同「聖誕樹」連住讀，因為係講棵樹嘅數量。最後放句號，表示呢句講完。","p.89");
+add("聖誕節|有|很多|禮物|。","book","聖誕節","先講「聖誕節」呢個日子，再用「有」帶出有乜嘢：係「很多禮物」。「很多」放喺「禮物」前面，一齊講禮物嘅數量。最後放句號，表示呢句講完。","p.89");
+add("朋友|送給|我|聖誕|卡|。","book","聖誕節","先問：邊個送？係「朋友」。跟住「送給我」，講清楚收禮物嘅係我。最後答：送乜嘢？係「聖誕卡」。「聖誕」同「卡」要連埋，先講得清楚係邊一種卡。最後放句號，表示呢句講完。","p.89");
+add("人|要|天天|喝水|。","book","水","先講邊個：係「人」。「要」帶出需要做嘅事；再將「天天」放喺「喝水」前面，講清楚唔係飲一次就夠，而係每日都需要飲。最後放句號，表示呢句講完。","p.62");
+add("我們|用水|洗|衣服|。","book","水","先問：邊個洗？係「我們」。再講用乜嘢洗：係「用水」。最後「洗衣服」，先講動作「洗」，再講洗乜嘢「衣服」，咁就清楚交代成件事。最後放句號，表示呢句講完。","p.62");
+add("中秋節|的|月亮|很|圓|。","book","中秋節","我哋想講邊個月亮？將「中秋節」「的」「月亮」連埋，就係中秋節嗰個月亮。跟住先講佢點樣：係「很圓」。「的」幫我哋將日子同月亮連起嚟。最後放句號，表示呢句講完。","p.43");
+add("我們|一起|吃|月餅|。","book","中秋節","先講邊個：係「我們」。將「一起」放喺活動「吃月餅」前面，就知道大家一齊做。「吃」後面接「月餅」，答返食乜。最後放句號，表示呢句講完。","p.43");
+add("小朋友|在公園|玩|花燈|。","book","中秋節","先問：邊個做緊嘢？係「小朋友」。再問：喺邊度？將「在公園」連住讀。最後問：做乜嘢？係「玩花燈」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。","p.43");
+add("我有|一個|好父親|。","book","家庭","先用「我有」帶出自己有乜嘢，再講「一個好父親」。「一個」同「好父親」連住，講清楚數量同係邊個。最後放句號，表示呢句講完。","p.35");
+add("我愛|我的|爸爸|。","book","家庭","先用「我愛」講我嘅感情，再答：愛邊個？係「我的爸爸」。「我的」要放喺「爸爸」前面，先講得清楚係我嘅爸爸。最後放句號，表示呢句講完。","p.35");
+add("父|親|節|快樂|。","book","家庭","呢句係祝福，唔係講邊個做緊乜。「父」「親」「節」要先連成「父親節」，講祝福邊個節日；再加「快樂」，就係祝大家父親節開心。最後放句號，表示呢句講完。","p.35");
+add("小鳥|在|空中|飛|。","book","動物","先問：邊個做緊嘢？係「小鳥」。再問：喺邊度？將「在空中」連住讀。最後問：做乜嘢？係「飛」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。","p.31");
+add("媽媽|帶|我們|坐|飛機|。","book","交通","先問：邊個帶大家去？係「媽媽」。跟住用「帶我們」講帶邊個，再講「坐飛機」，交代去邊度或者做乜。最後放句號，表示呢句講完。","p.31");
+add("蝴蝶|在|花叢中|飛來飛去|。","book","動物","先問：邊個做緊嘢？係「蝴蝶」。再問：喺邊度？將「在花叢中」連住讀。最後問：做乜嘢？係「飛來飛去」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。","p.31");
+add("我們|在|草地上|跑步|。","book","動物與戶外","先問：邊個做緊嘢？係「我們」。再問：喺邊度？將「在草地上」連住讀。最後問：做乜嘢？係「跑步」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。","p.20");
+add("小山羊|在|地上|走|。","book","動物","先問：邊個做緊嘢？係「小山羊」。再問：喺邊度？將「在地上」連住讀。最後問：做乜嘢？係「走」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。","p.20");
+add("小貓|是|最|可愛|的|動物|。","book","動物","先講我哋介紹嘅係「小貓」，再用「是」接住介紹。「最可愛的」要放喺「動物」前面，合埋講係點樣嘅動物，唔好將呢一組拆散。最後放句號，表示呢句講完。","p.20");
+add("魚兒|在|水中|游泳|。","book","海洋","先問：邊個做緊嘢？係「魚兒」。再問：喺邊度？將「在水中」連住讀。最後問：做乜嘢？係「游泳」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。","p.25");
+add("妹妹|喜歡|去|沙灘|堆沙|。","book","海洋","先講邊個有呢個喜好：係「妹妹」。再用「喜歡」連去後面嘅「去沙灘堆沙」，答返鍾意乜嘢或者做乜。「去沙灘」要先講去，再講目的地。「堆沙」接喺後面，講去到做乜。最後放句號，表示呢句講完。","p.25");
+add("鯊魚|在|海洋裡|生活|。","book","海洋","先問：邊個做緊嘢？係「鯊魚」。再問：喺邊度？將「在海洋裡」連住讀。最後問：做乜嘢？係「生活」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。","p.25");
+add("爸爸|和我|坐船|去釣魚|。","book","交通","先將「爸爸」「和我」連埋，講清楚係兩個人一齊。再講點樣去：係「坐船」。最後「去釣魚」講出目的，咁就知道邊個、點去、去做乜。最後放句號，表示呢句講完。","p.71");
+add("飛機|是|空中|交通|工具|。","book","交通","先講介紹嘅係「飛機」，再用「是」帶出佢係乜。「空中」「交通」「工具」連埋，講清楚係喺空中來往嘅交通工具。最後放句號，表示呢句講完。","p.71");
+add("春天|到了|，|蜜蜂|採花蜜|。","new","春天","呢句有兩部分。先用「春天到了」講季節嘅轉變，放逗號停一停；再用「蜜蜂採花蜜」講蜜蜂做乜。逗號分開兩個意思，句號放最尾。","p.81・標點補充");
+add("我|喜歡|春天|。","new","春天","先講邊個有呢個喜好：係「我」。再用「喜歡」連去後面嘅「春天」，答返鍾意乜嘢或者做乜。咁就由邊個開始，接住講喜好，意思先完整。最後放句號，表示呢句講完。");
+add("我|喜歡|夏天|。","new","季節","先講邊個有呢個喜好：係「我」。再用「喜歡」連去後面嘅「夏天」，答返鍾意乜嘢或者做乜。咁就由邊個開始，接住講喜好，意思先完整。最後放句號，表示呢句講完。");
+add('春天|天氣暖|。','new','季節','「春天」講時間，「天氣暖」講嗰個季節天氣點樣。');
+add('夏天|天氣熱|。','new','季節','「夏天」講季節，「天氣熱」講天氣。');
+add('冬天|天氣冷|。','new','季節','「冬天」講季節，「天氣冷」講天氣。');
+add("妹妹|喜歡|喝水|。","new","水","先講邊個有呢個喜好：係「妹妹」。再用「喜歡」連去後面嘅「喝水」，答返鍾意乜嘢或者做乜。咁就由邊個開始，接住講喜好，意思先完整。最後放句號，表示呢句講完。");
+add("我們|要|喝水|。","new","水","先講邊個：係「我們」。再用「要」帶出需要做嘅事「喝水」。由邊個、需要、做乜嘢咁樣講，就表達到完整意思。最後放句號，表示呢句講完。");
+add("小朋友|喜歡|吃|月餅|。","new","中秋節","先講邊個有呢個喜好：係「小朋友」。再用「喜歡」連去後面嘅「吃月餅」，答返鍾意乜嘢或者做乜。「吃」後面接「月餅」，先講食，再講食乜。最後放句號，表示呢句講完。");
+add("我們|喜歡|春天|。","new","春天","先講邊個有呢個喜好：係「我們」。再用「喜歡」連去後面嘅「春天」，答返鍾意乜嘢或者做乜。咁就由邊個開始，接住講喜好，意思先完整。最後放句號，表示呢句講完。");
+add("魚兒|在|水中|生活|。","new","海洋","先問：邊個做緊嘢？係「魚兒」。再問：喺邊度？將「在水中」連住讀。最後問：做乜嘢？係「生活」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。");
+add("蝴蝶|在|花叢中|飛|。","new","動物","先問：邊個做緊嘢？係「蝴蝶」。再問：喺邊度？將「在花叢中」連住讀。最後問：做乜嘢？係「飛」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。");
+add("小鳥|在|空中|飛來飛去|。","new","動物","先問：邊個做緊嘢？係「小鳥」。再問：喺邊度？將「在空中」連住讀。最後問：做乜嘢？係「飛來飛去」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。");
+add("飛機|在|空中|飛|。","new","交通","先問：邊個做緊嘢？係「飛機」。再問：喺邊度？將「在空中」連住讀。最後問：做乜嘢？係「飛」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。");
+add("我們|在|草地上|走|。","new","戶外","先問：邊個做緊嘢？係「我們」。再問：喺邊度？將「在草地上」連住讀。最後問：做乜嘢？係「走」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。");
+add("小山羊|在|草地上|走|。","new","動物","先問：邊個做緊嘢？係「小山羊」。再問：喺邊度？將「在草地上」連住讀。最後問：做乜嘢？係「走」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。");
+add("小朋友|在|草地上|跑步|。","new","戶外","先問：邊個做緊嘢？係「小朋友」。再問：喺邊度？將「在草地上」連住讀。最後問：做乜嘢？係「跑步」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。");
+add("媽媽|帶|我們|去|沙灘|。","new","戶外","先問：邊個帶大家去？係「媽媽」。跟住用「帶我們」講帶邊個，再講「去沙灘」，交代去邊度或者做乜。最後放句號，表示呢句講完。");
+add("我們|一起|去|沙灘|。","new","戶外","先講邊個：係「我們」。將「一起」放喺活動「去沙灘」前面，就知道大家一齊做。後面再交代去邊度或者做乜嘢。最後放句號，表示呢句講完。");
+add("小朋友|在|沙灘|堆沙|。","new","戶外","先問：邊個做緊嘢？係「小朋友」。再問：喺邊度？將「在沙灘」連住讀。最後問：做乜嘢？係「堆沙」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。");
+add("我們|在|公園|跑步|。","new","戶外","先問：邊個做緊嘢？係「我們」。再問：喺邊度？將「在公園」連住讀。最後問：做乜嘢？係「跑步」。呢個排法先介紹邊個，再交代地方，最後講活動，聽嘅人就容易跟到。最後放句號，表示呢句講完。");
+add("爸爸|帶|我們|去|公園|。","new","家庭","先問：邊個帶大家去？係「爸爸」。跟住用「帶我們」講帶邊個，再講「去公園」，交代去邊度或者做乜。最後放句號，表示呢句講完。");
+add("我們|一起|坐船|去釣魚|。","new","交通","先講邊個：係「我們」。將「一起」放喺活動「坐船去釣魚」前面，就知道大家一齊做。後面再交代去邊度或者做乜嘢。最後放句號，表示呢句講完。");
+add("妹妹|喜歡|去|沙灘|。","new","海洋","先講邊個有呢個喜好：係「妹妹」。再用「喜歡」連去後面嘅「去沙灘」，答返鍾意乜嘢或者做乜。「去沙灘」要先講去，再講目的地。最後放句號，表示呢句講完。");
+add("聖誕節|有|很多|聖誕卡|。","new","聖誕節","先講「聖誕節」呢個日子，再用「有」帶出有乜嘢。「很多聖誕卡」要一齊讀，先講數量，再講係乜物品。最後放句號，表示呢句講完。");
+add("媽媽|帶|我們|一起|去|沙灘|。","new","家庭","先問：邊個帶大家去？係「媽媽」。跟住用「帶我們」講帶邊個，再講「去沙灘」，交代去邊度或者做乜。「一起」放喺活動前面，講大家一齊去。最後放句號，表示呢句講完。");
+add("爸爸|帶|我們|一起|去|公園|。","new","家庭","先問：邊個帶大家去？係「爸爸」。跟住用「帶我們」講帶邊個，再講「去公園」，交代去邊度或者做乜。「一起」放喺活動前面，講大家一齊去。最後放句號，表示呢句講完。");
+add("妹妹|喜歡|和我|一起|去|沙灘|。","new","戶外","先講邊個有呢個喜好：係「妹妹」。再用「喜歡」連去後面嘅「和我一起去沙灘」，答返鍾意乜嘢或者做乜。「和我一起」連住讀，講同邊個一齊；「去沙灘」就先講去，再講目的地。最後放句號，表示呢句講完。");
+add("馬路上|車子|多|，|我們|要小心|。","new","交通","先用「馬路上車子多」交代情況：邊度車多？係馬路上。逗號停一停，再講「我們要小心」。先知道車多，再講要小心，兩部分就有關係。");
+// 避免超過七張字卡；每題均要有句號，標點亦要由小朋友排序。
+const bank=raw.filter(q=>q.tokens.length>=4&&q.tokens.length<=7&&q.tokens[q.tokens.length-1]==='。').map(q=>({...q,answer:q.tokens.join('')}));
+bank.find(q=>q.answer==='郵差天天送信。').alternatives=['天天郵差送信。'];
+const descriptions={
+'郵差':'送信畀大家嘅人','天天':'每日都係咁','送信':'將信送去收信人度','我':'自己','我們':'我同其他人','我有':'我擁有','有':'存在或者擁有','一棵':'數一棵樹','聖誕樹':'聖誕節裝飾嘅樹','聖誕節':'十二月嘅節日','很多':'數量好多','禮物':'送畀人嘅物品','朋友':'一齊玩或者認識嘅人','送給':'將嘢送畀人','聖誕':'同聖誕節有關','卡':'卡片','聖誕卡':'聖誕節嘅祝福卡','人':'人類','要':'需要或者應該','喝水':'飲水','用水':'使用水','洗':'用水清潔','衣服':'著喺身上嘅衫','中秋節':'食月餅、賞月嘅節日','的':'將前面嘅詞同後面連起嚟','月亮':'夜晚天上見到嘅月亮','很':'非常或者好','圓':'圓形、冇角','一起':'大家一齊','吃':'食嘢','月餅':'中秋節會食嘅餅','小朋友':'小孩子','在公園':'喺公園嗰度','玩':'做遊戲','花燈':'節日用嘅燈籠','一個':'數一個','好父親':'好爸爸','我愛':'我好鍾意同珍惜','我的':'屬於我嘅','爸爸':'爸爸、父親','父':'父親嘅父','親':'親人嘅親','節':'節日嘅節','快樂':'開心','小鳥':'細細隻嘅雀仔','在':'喺某個地方','空中':'天空入面','飛':'喺天空飛','媽媽':'母親','帶':'帶領或者帶住','坐':'坐喺度或者乘搭','飛機':'喺天空飛嘅交通工具','蝴蝶':'有翅膀嘅昆蟲','花叢中':'好多花嘅地方','飛來飛去':'不停飛嚟飛去','草地上':'草地嗰度','跑步':'用腳跑','小山羊':'細細隻嘅山羊','地上':'地下、地面','走':'用腳行','小貓':'細細隻嘅貓','是':'表示乜嘢係乜嘢','最':'比較入面排第一','可愛':'得意、討人喜歡','動物':'貓、鳥、魚等生物','魚兒':'魚仔','水中':'水入面','游泳':'喺水入面游','妹妹':'年紀細啲嘅女孩子','喜歡':'鍾意','去':'去某個地方','沙灘':'海邊有沙嘅地方','堆沙':'用沙砌嘢','鯊魚':'海裡面嘅一種魚','海洋裡':'大海入面','生活':'住同過日子','和我':'同我一齊','坐船':'搭船','去釣魚':'去釣魚','交通':'來往地方嘅方法','工具':'幫人做事嘅物品','春天':'冬天之後嘅季節','到了':'已經來到','蜜蜂':'採花蜜嘅昆蟲','採花蜜':'去花度收集花蜜','夏天':'天氣通常比較熱嘅季節','冬天':'天氣通常比較凍嘅季節','天氣暖':'天氣唔太凍','天氣熱':'天氣好熱','天氣冷':'天氣凍','公園':'可以去玩同散步嘅地方','。':'句號，代表一句說話完咗','，':'逗號，代表講嘢時停一停'};
+const $=id=>document.getElementById(id);
+const profile=new URLSearchParams(location.search).get('profile')==='younger'?'younger':'elder';
+const storageKey='chinese-learning-games:sentence:'+profile;
+$('hubLink').href='../index.html?profile='+profile;
+$('playerLabel').textContent=profile==='elder'?'哥哥嘅練習':'細佬嘅練習';
+let stats;
+try{stats=JSON.parse(localStorage.getItem(storageKey)||'{}')}catch(e){stats={}}
+window.addEventListener('pageshow',event=>{if(event.persisted)location.reload()});
+stats={done:0,first:0,streak:0,wrong:[],...stats};if(!Array.isArray(stats.wrong))stats.wrong=[];
+let current=null,pool=[],placed=[],mistakes=0,finished=false,questionNumber=0,lastIds=[],slow=false,activeVoice=null,voiceWarned=false,drag=null,holdTimer=null,ghost=null,lastPointer=null;
+function save(){try{localStorage.setItem(storageKey,JSON.stringify(stats))}catch(e){}}
+function toast(message){const el=$('toast');el.textContent=message;el.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>{el.style.display='none'},2350)}
+function getVoices(){return ('speechSynthesis' in window)?speechSynthesis.getVoices():[]}
+function chooseVoice(){let v=getVoices();let c=v.find(x=>/zh[-_]HK/i.test(x.lang))||v.find(x=>/cantonese|yue|hong kong|香港|粵語/i.test(x.name));activeVoice=c||null;let status=$('voiceStatus');if(!('speechSynthesis' in window)){status.innerHTML='⚠️ 呢個瀏覽器唔支援內置語音朗讀，請改用 Safari。';return;}if(c){status.textContent='✅ 偵測到廣東話聲線：'+c.name+'。撳字卡或者「試聽」就可以讀。';status.style.color='#14755d'}else{status.textContent='⚠️ 暫時未偵測到中文（香港）聲線。撳「試聽」測試；如果讀成普通話，請先安裝 iPad 廣東話聲線。';status.style.color='#9b661c'}}
+function speak(content,opts={}){if(!('speechSynthesis' in window)){toast('呢個瀏覽器未能用語音朗讀');return}if(!content)return;try{speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(content);u.lang='zh-HK';if(activeVoice)u.voice=activeVoice;u.rate=opts.slow?.72:.87;u.pitch=1;u.volume=1;u.onerror=e=>{if(e.error!=='canceled'&&e.error!=='interrupted')toast('語音播唔到；請先試聽同檢查聲線')};speechSynthesis.speak(u)}catch(e){toast('暫時播放唔到聲音')}}
+function speakWord(word,slowIt=false){if($('mode').value==='exam')speak(word,{slow:slowIt});else{speak(word+(descriptions[word]?'。意思係：'+descriptions[word]+'。':''),{slow:slowIt})}}
+function randomize(array){let a=[...array];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function level(){if($('difficulty').value!=='auto')return +$('difficulty').value;return Math.min(7,4+Math.floor(stats.first/3))}
+function pick(){let kind=$('kind').value,n=level(),items=bank.filter(q=>q.tokens.length===n);if(kind==='book')items=items.filter(q=>q.origin==='book');else if(kind==='new')items=items.filter(q=>q.origin==='new');else if(kind==='wrong')items=items.filter(q=>stats.wrong.includes(q.id));if(!items.length){if(kind==='wrong'){toast('暫時冇呢個字卡數量嘅錯題；改用全部題目');$('kind').value='all';return pick()}toast('呢個設定暫時冇題目；幫你揀最接近嘅難度');items=bank.filter(q=>kind==='all'||q.origin===kind);items.sort((a,b)=>Math.abs(a.tokens.length-n)-Math.abs(b.tokens.length-n));let dist=Math.abs(items[0]?.tokens.length-n);items=items.filter(x=>Math.abs(x.tokens.length-n)===dist)}let fresh=items.filter(q=>!lastIds.includes(q.id));let list=fresh.length?fresh:items;let q=list[Math.floor(Math.random()*list.length)];lastIds.push(q.id);if(lastIds.length>Math.min(9,bank.length))lastIds.shift();return q}
+function newQuestion(){stopDrag();current=pick();if(!current){toast('暫時冇可用題目');return}questionNumber++;finished=false;mistakes=0;placed=[];pool=randomize(current.tokens.map((text,i)=>({id:`t${i}`,text})));if(pool.map(t=>t.text).join('')===current.answer)pool.reverse();$('feedback').className='feedback hidden';$('feedback').innerHTML='';$('next').classList.remove('hidden');$('next').textContent='👀 睇答案，再下一題';$('check').classList.remove('hidden');$('levelPill').textContent=current.tokens.length+' 張字卡';$('originPill').textContent=current.origin==='book'?'📖 課本例題':'✨ 詞庫新組合';$('topicPill').textContent=current.topic;$('progressText').textContent='第 '+questionNumber+' 題'+(current.page?' ・參考 '+current.page:'');render();updateStats();}
+function tileButton(tile){let b=document.createElement('button');b.type='button';b.className='tile';b.dataset.id=tile.id;b.setAttribute('aria-label',tile.text+'，輕按讀音，長按拖拉');let t=document.createElement('span');t.textContent=tile.text;b.append(t);let sound=document.createElement('span');sound.className='tiny-sound';sound.textContent='♪';b.append(sound);b.addEventListener('pointerdown',onDown);b.addEventListener('pointermove',onMove);b.addEventListener('pointerup',onUp);b.addEventListener('pointercancel',onCancel);b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();speakWord(tile.text)}});return b}
+function render(){const p=$('pool'),s=$('slots');p.replaceChildren();s.replaceChildren();for(let tile of pool)p.append(tileButton(tile));let count=current.tokens.length;for(let i=0;i<count;i++){let slot=document.createElement('div');slot.className='slot'+(placed[i]?' filled':'');slot.dataset.slotIndex=i;slot.setAttribute('aria-label',`第${i+1}格`);if(placed[i])slot.append(tileButton(placed[i]));else {let label=document.createElement('span');label.textContent='＋';slot.append(label)}let countLabel=document.createElement('span');countLabel.className='slot-num';countLabel.textContent=i+1;slot.append(countLabel);s.append(slot)}$('remaining').textContent='仲有 '+pool.length+' 張';}
+function stopDrag(){clearTimeout(holdTimer);holdTimer=null;if(ghost)ghost.remove();ghost=null;document.querySelectorAll('.can-drop,.dragsource').forEach(e=>e.classList.remove('can-drop','dragsource'));drag=null;lastPointer=null}
+function onDown(e){if(finished||e.button>0)return;if(drag)return;let id=e.currentTarget.dataset.id,from=placed.some(t=>t.id===id)?'placed':'pool';lastPointer={id,from,el:e.currentTarget,pointer:e.pointerId,startX:e.clientX,startY:e.clientY,x:e.clientX,y:e.clientY,dragStarted:false};try{e.currentTarget.setPointerCapture(e.pointerId)}catch(err){}holdTimer=setTimeout(()=>{if(lastPointer&&lastPointer.pointer===e.pointerId){beginDrag(lastPointer);lastPointer.dragStarted=true}},340)}
+function beginDrag(state){if(!state||finished)return;drag={id:state.id,from:state.from};let tile=[...pool,...placed].find(t=>t.id===state.id);if(!tile)return;ghost=tileButton(tile);ghost.className='tile drag-ghost';ghost.style.left=state.x+'px';ghost.style.top=state.y+'px';ghost.setAttribute('aria-hidden','true');document.body.append(ghost);state.el.classList.add('dragsource')}
+function onMove(e){let s=lastPointer;if(!s||s.pointer!==e.pointerId)return;s.x=e.clientX;s.y=e.clientY;let dist=Math.hypot(s.x-s.startX,s.y-s.startY);if(!s.dragStarted&&dist>22){clearTimeout(holdTimer);holdTimer=null}if(s.dragStarted){e.preventDefault();if(ghost){ghost.style.left=e.clientX+'px';ghost.style.top=e.clientY+'px'}document.querySelectorAll('.can-drop').forEach(x=>x.classList.remove('can-drop'));let target=document.elementFromPoint(e.clientX,e.clientY);let slot=target?.closest?.('.slot'),bp=target?.closest?.('#pool');if(slot)slot.classList.add('can-drop');else if(bp)bp.classList.add('can-drop')}}
+function onUp(e){let s=lastPointer;if(!s||s.pointer!==e.pointerId)return;clearTimeout(holdTimer);holdTimer=null;if(s.dragStarted){let target=document.elementFromPoint(e.clientX,e.clientY);let slot=target?.closest?.('.slot'),bp=target?.closest?.('#pool');let tile=[...pool,...placed].find(t=>t.id===s.id);if(slot){let index=+slot.dataset.slotIndex;placed=placed.filter(t=>t.id!==s.id);pool=pool.filter(t=>t.id!==s.id);placed.splice(Math.min(index,placed.length),0,tile);$('feedback').classList.add('hidden');render()}else if(bp){placed=placed.filter(t=>t.id!==s.id);if(!pool.some(t=>t.id===s.id))pool.push(tile);$('feedback').classList.add('hidden');render()}else{toast('拖去下面嘅答案格，或者拖返上面')} }else{let tile=[...pool,...placed].find(t=>t.id===s.id);if(tile)speakWord(tile.text)}stopDrag()}
+function onCancel(){stopDrag()}
+function readProblem(){if(!current)return;let order=pool.concat(placed).map(t=>t.text);speak('請你將以下詞語重組成一句通順嘅句子。'+order.map(x=>x==='。'?'句號':x==='，'?'逗號':x).join('，')+'。長按字卡，拖去下面排好次序。')}
+function markDone(wasFirst){stats.done++;if(wasFirst){stats.first++;stats.streak++}else{stats.streak=0}if(mistakes===0){stats.wrong=stats.wrong.filter(id=>id!==current.id)}save();updateStats()}
+function updateStats(){$('attemptStat').textContent=stats.done;$('firstStat').textContent=(stats.done?Math.round(stats.first/stats.done*100):0)+'%';$('streakStat').textContent=stats.streak;$('wrongStat').textContent=stats.wrong.length}
+function addSlowExplanation(){const normal=$('readExplain');if(!normal)return;const b=document.createElement('button');b.className='btn light';b.textContent='🐢 慢速聽講解';b.style.marginLeft='7px';b.onclick=()=>speak(current.answer+current.why,{slow:true});normal.after(b)}
+function escapeText(t){return t.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function check(){if(finished)return;if(pool.length){speak('仲有'+pool.length+'張字卡未放好。先放晒所有字卡，再檢查答案。');toast('仲有 '+pool.length+' 張字卡未放好');return}let attempt=placed.map(t=>t.text).join('');let correct=attempt===current.answer||(current.alternatives||[]).includes(attempt);let box=$('feedback');box.className='feedback '+(correct?'good':'bad');if(correct){let text='叻呀！你排嘅句子講得通：'+attempt+'點解講得通呢？'+current.why;box.innerHTML='<strong>🎉 做得好！答啱喇！</strong><div class="answer">'+escapeText(attempt)+'</div><p>'+escapeText(current.why)+'</p><button class="btn secondary" id="readExplain">🔊 再聽一次解釋</button>';finished=true;markDone(mistakes===0);$('check').classList.add('hidden');$('next').textContent='➡️ 下一題';$('readExplain').onclick=()=>speak(text);addSlowExplanation();speak(text)}else{mistakes++;if(!stats.wrong.includes(current.id))stats.wrong.push(current.id);stats.streak=0;save();updateStats();const wrongPos=placed.findIndex((t,i)=>t.text!==current.tokens[i]);const misplaced=wrongPos>=0?placed[wrongPos].text:'';const expected=current.tokens[wrongPos]||'';let detail=wrongPos>=0?'你而家由「'+misplaced+'」呢張卡開始，同示範嘅次序唔同。我哋先諗成句想講乜，再一齊試吓呢個排法。':'';let voice='呢題未啱，唔緊要。我哋睇吓。'+detail+'正確句子係：'+current.answer+'。'+current.why+'。你可以再拖動字卡試一次。';box.innerHTML='<strong>🌻 差少少，聽吓點樣排</strong><p>'+escapeText(detail)+'</p><div class="answer">參考排法：'+escapeText(current.answer)+'</div><p>'+escapeText(current.why)+'</p><button class="btn secondary" id="readExplain">🔊 再聽一次解釋</button><button class="btn light" id="reveal" style="margin-left:7px">👀 示範排列</button>';box.querySelector('#readExplain').onclick=()=>speak(voice);box.querySelector('#reveal').onclick=showAnswer;addSlowExplanation();speak(voice)}}
+function showAnswer(){if(finished)return;if(!stats.wrong.includes(current.id))stats.wrong.push(current.id);mistakes=Math.max(1,mistakes);placed=current.tokens.map((text,i)=>({id:'t'+i,text}));pool=[];finished=true;markDone(false);render();let box=$('feedback');box.className='feedback good';box.innerHTML='<strong>📖 一齊讀正確句子</strong><div class="answer">'+escapeText(current.answer)+'</div><p>'+escapeText(current.why)+'</p><button class="btn secondary" id="readExplain">🔊 讀解釋</button>';$('readExplain').onclick=()=>speak('正確句子係：'+current.answer+'。'+current.why);$('check').classList.add('hidden');$('next').textContent='➡️ 下一題';addSlowExplanation();speak('正確句子係：'+current.answer+'。'+current.why)}
+function resetBoard(){if(finished)return;pool=randomize([...pool,...placed]);placed=[];$('feedback').className='feedback hidden';render();speak('重新嚟過。慢慢諗，呢句想講邊個，或者想介紹乜嘢？再諗後面要補充啲乜。')}
+$('testVoice').onclick=()=>{chooseVoice();speak('你好呀！我哋一齊玩重組句子。你準備好未？')};$('readProblem').onclick=readProblem;$('replay').onclick=()=>{slow=true;speak('慢慢聽。'+(placed.length?placed:pool).map(x=>x.text).join('，'),{slow:true})};$('check').onclick=check;$('next').onclick=()=>{if(!finished){showAnswer();toast('先聽完解釋，再撳下一題');}else{newQuestion()}};$('clear').onclick=resetBoard;
+$('difficulty').onchange=newQuestion;$('kind').onchange=newQuestion;$('mode').onchange=()=>{toast($('mode').value==='exam'?'考試模式：輕按只讀詞語，唔講意思':'練習模式：輕按會讀詞語同意思')};
+$('reviewWrong').onclick=()=>{if(!stats.wrong.length){toast('暫時冇錯題，要繼續加油！');return}$('kind').value='wrong';let w=bank.find(q=>stats.wrong.includes(q.id));if(w){$('difficulty').value=String(w.tokens.length)}newQuestion()};
+if('speechSynthesis' in window){speechSynthesis.onvoiceschanged=chooseVoice;setTimeout(chooseVoice,180)}else{chooseVoice()}newQuestion();
+})();
+</script>
+</body>
+</html>
