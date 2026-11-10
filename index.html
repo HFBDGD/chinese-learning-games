@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#fff8e8">
+  <title>中文學習樂園</title>
+  <style>
+    :root{--ink:#24324a;--muted:#65738a;--paper:#fffdf8;--cream:#fff5d8;--blue:#dff2ff;--blue2:#4b9fe1;--green:#dff7e9;--green2:#35a66f;--pink:#ffe5ee;--pink2:#e96f97;--purple:#eee7ff;--purple2:#8265d5;--orange:#ffdda4;--orange2:#d87919;--danger:#c74444;--shadow:0 12px 32px rgba(46,62,92,.11);--radius:24px}
+    *{box-sizing:border-box}
+    body{margin:0;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;background:radial-gradient(circle at 8% 2%,#fff0b9 0,transparent 26%),radial-gradient(circle at 92% 7%,#dff2ff 0,transparent 30%),#fffaf0;min-height:100vh}
+    button,select{font:inherit}
+    button{color:inherit}
+    .shell{width:min(1040px,100%);margin:auto;padding:28px 20px 54px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand-mark{display:grid;place-items:center;width:58px;height:58px;border-radius:20px;background:#fff;box-shadow:var(--shadow);font-size:31px}
+    h1{font-size:clamp(29px,5vw,44px);line-height:1.1;margin:0}
+    .subtitle{margin:7px 0 0;color:var(--muted);font-weight:700}
+    .quiet-button{border:0;background:rgba(255,255,255,.82);border-radius:18px;padding:12px 16px;box-shadow:0 5px 18px rgba(46,62,92,.09);font-weight:800;cursor:pointer}
+    .panel{background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.96);box-shadow:var(--shadow);border-radius:30px;padding:24px}
+    .profile-title,.section-title{margin:0 0 14px;font-size:21px}
+    .profiles{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .profile{position:relative;border:3px solid transparent;border-radius:24px;padding:17px;background:#f6f8fc;cursor:pointer;text-align:left;min-height:105px;display:flex;align-items:center;gap:15px;transition:.18s transform,.18s border-color}
+    .profile:hover{transform:translateY(-2px)}
+    .profile.active{border-color:var(--blue2);background:var(--blue)}
+    .avatar{display:grid;place-items:center;min-width:58px;height:58px;border-radius:19px;background:#fff;font-size:33px}
+    .profile strong{font-size:22px;display:block}
+    .profile small{color:var(--muted);font-weight:700}
+    .tick{display:none;position:absolute;right:13px;top:11px;color:var(--blue2);font-size:20px}
+    .profile.active .tick{display:block}
+    .welcome{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:25px 0 15px}
+    .welcome p{margin:0;color:var(--muted);font-weight:700}
+    .games{display:grid;grid-template-columns:repeat(2,1fr);gap:17px}
+    .game{border:0;border-radius:var(--radius);padding:24px;text-align:left;min-height:185px;cursor:pointer;box-shadow:var(--shadow);transition:.18s transform,.18s box-shadow;position:relative;overflow:hidden}
+    .game:hover{transform:translateY(-3px);box-shadow:0 16px 37px rgba(46,62,92,.15)}
+    .game .icon{display:block;font-size:52px;margin-bottom:14px}
+    .game strong{font-size:25px;display:block}
+    .game p{font-size:16px;color:#526078;font-weight:700;margin:7px 0 0}
+    .game .wrong-badge{position:absolute;right:15px;top:15px;background:#fff;border-radius:999px;padding:7px 10px;font-size:14px;font-weight:900;box-shadow:0 4px 12px rgba(40,50,80,.1)}
+    .listen{background:var(--blue)}.read{background:var(--green)}.sentence{background:var(--purple)}.write{background:var(--pink)}
+    .tip{margin:20px 2px 0;text-align:center;color:var(--muted);font-weight:700}
+    .hidden{display:none!important}
+    .game-screen{min-height:560px}
+    .game-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+    .back{border:0;background:#f2f5f9;padding:11px 15px;border-radius:15px;font-weight:900;cursor:pointer}
+    .game-heading{text-align:center;flex:1}
+    .game-heading h2{font-size:27px;margin:0}
+    .game-heading p{margin:4px 0 0;color:var(--muted);font-weight:700}
+    .mode-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:4px 0 22px}
+    .mode-button{border:2px solid #dfe5ed;background:#fff;border-radius:999px;padding:10px 16px;font-weight:900;cursor:pointer}
+    .mode-button.active{border-color:var(--blue2);background:var(--blue)}
+    .question-card{background:#fffaf0;border:2px solid #f4e7c2;border-radius:28px;padding:28px;text-align:center;max-width:720px;margin:auto}
+    .prompt-icon{font-size:58px;display:block;margin-bottom:10px}
+    .prompt{font-size:clamp(25px,5vw,38px);line-height:1.4;margin:6px 0 20px;font-weight:900}
+    .speak{border:0;background:var(--blue2);color:#fff;padding:13px 20px;border-radius:18px;font-weight:900;cursor:pointer;margin-bottom:18px}
+    .answers{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+    .answer{border:3px solid #e5e9ef;background:#fff;border-radius:19px;min-height:70px;padding:13px;font-weight:900;font-size:23px;cursor:pointer}
+    .answer:hover{border-color:var(--blue2)}
+    .answer.correct{border-color:var(--green2);background:var(--green)}
+    .answer.wrong{border-color:var(--danger);background:#ffe8e8}
+    .feedback{min-height:34px;font-size:20px;font-weight:900;margin:19px 0 0}
+    .next{border:0;background:var(--ink);color:#fff;padding:13px 22px;border-radius:17px;font-weight:900;cursor:pointer;margin-top:9px}
+    .trace{font-size:92px;color:#d8c7d0;letter-spacing:10px;margin:20px 0;font-family:"KaiTi TC","BiauKai",serif;text-shadow:2px 2px #fff}
+    .parent-note{font-size:14px;color:var(--muted);text-align:center;margin:26px 0 0}
+    dialog{width:min(700px,calc(100% - 30px));border:0;border-radius:28px;padding:0;box-shadow:0 24px 90px rgba(20,30,50,.28);color:var(--ink)}
+    dialog::backdrop{background:rgba(26,35,54,.5)}
+    .dialog-body{padding:25px}
+    .dialog-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .dialog-top h2{margin:0;font-size:27px}
+    .close{border:0;background:#edf1f5;width:42px;height:42px;border-radius:14px;font-size:22px;cursor:pointer}
+    .summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:18px 0}
+    .summary-item{background:#f6f8fb;border-radius:17px;padding:14px;font-weight:800}
+    .summary-item span{display:block;color:var(--muted);font-size:14px;margin-top:4px}
+    .reset-group{border-top:1px solid #e6eaf0;padding-top:18px;margin-top:18px}
+    .reset-group h3{margin:0 0 10px}
+    .reset-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .reset-button{border:0;background:#eef2f6;border-radius:15px;padding:13px;font-weight:900;cursor:pointer}
+    .reset-button.danger{background:#ffe4e4;color:#9f2828}
+    .parent-status{font-weight:800;color:var(--green2);min-height:24px;margin:12px 0 0}
+    @media(max-width:650px){.shell{padding:18px 14px 42px}header{align-items:flex-start}.brand-mark{width:50px;height:50px}.quiet-button{padding:10px 12px}.panel{padding:17px}.profiles,.games{grid-template-columns:1fr}.profile{min-height:92px}.game{min-height:152px;padding:20px}.game .icon{font-size:45px;margin-bottom:8px}.answers,.summary-grid,.reset-actions{grid-template-columns:1fr}.game-screen{min-height:500px}.question-card{padding:21px 15px}.game-top{align-items:flex-start}.game-heading h2{font-size:23px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div class="brand"><div class="brand-mark">🌱</div><div><h1>中文學習樂園</h1><p class="subtitle">揀一揀，玩住學中文</p></div></div>
+      <button class="quiet-button" id="parentButton" aria-label="長按兩秒開啟家長專區">🔒 家長</button>
+    </header>
+
+    <section id="homeScreen">
+      <div class="panel">
+        <h2 class="profile-title">今日邊個練習？</h2>
+        <div class="profiles">
+          <button class="profile" data-profile="elder"><span class="avatar">🦁</span><span><strong>哥哥</strong><small>獨立進度及錯題</small></span><span class="tick">●</span></button>
+          <button class="profile" data-profile="younger"><span class="avatar">🐼</span><span><strong>細佬</strong><small>獨立進度及錯題</small></span><span class="tick">●</span></button>
+        </div>
+      </div>
+      <div class="welcome"><div><h2 class="section-title" id="welcomeTitle">先揀小朋友</h2><p id="welcomeText">每人嘅錯題會分開保存。</p></div></div>
+      <div class="games">
+        <button class="game listen" data-game="listen"><span class="wrong-badge" data-badge="listen">錯題 0</span><span class="icon">🎧</span><strong>聽音認字</strong><p>聽一聽，再揀答案</p></button>
+        <button class="game read" data-game="read"><span class="wrong-badge" data-badge="read">錯題 0</span><span class="icon">📖</span><strong>閱讀理解</strong><p>睇短句，搵出答案</p></button>
+        <button class="game sentence" data-game="sentence"><span class="wrong-badge" data-badge="sentence">錯題 0</span><span class="icon">🧩</span><strong>重組句子</strong><p>將詞語排成完整句子</p></button>
+        <button class="game write" data-game="write"><span class="wrong-badge" data-badge="write">錯題 0</span><span class="icon">✏️</span><strong>寫字練習</strong><p>睇字形，跟住寫</p></button>
+      </div>
+      <p class="tip">💡 答錯嘅題目會自動放入個人錯題簿。</p>
+    </section>
+
+    <section class="panel game-screen hidden" id="gameScreen" aria-live="polite">
+      <div class="game-top"><button class="back" id="backButton">← 返回</button><div class="game-heading"><h2 id="gameTitle"></h2><p id="gameSubtitle"></p></div><span aria-hidden="true">⭐</span></div>
+      <div class="mode-row" id="modeRow"><button class="mode-button active" data-mode="all">全部題目</button><button class="mode-button" data-mode="wrong">只做錯題</button><button class="mode-button hidden" id="wordMode" data-listen-mode="word">認單字</button><button class="mode-button hidden" id="phraseMode" data-listen-mode="phrase">認詞語</button></div>
+      <div class="question-card" id="questionCard"></div>
+    </section>
+    <p class="parent-note">家長專區：長按右上角「家長」兩秒。</p>
+  </main>
+
+  <dialog id="parentDialog">
+    <div class="dialog-body">
+      <div class="dialog-top"><h2>🔒 家長專區</h2><button class="close" id="closeDialog" aria-label="關閉">×</button></div>
+      <p>查看個別錯題，或者重新開始指定練習。所有紀錄只儲存在呢部裝置。</p>
+      <div class="mode-row"><button class="mode-button active" data-parent-profile="elder">哥哥</button><button class="mode-button" data-parent-profile="younger">細佬</button></div>
+      <div class="summary-grid" id="parentSummary"></div>
+      <div class="reset-group"><h3>重設指定遊戲</h3><div class="reset-actions" id="gameResetButtons"></div></div>
+      <div class="reset-group"><h3>重新整理紀錄</h3><div class="reset-actions"><button class="reset-button" id="clearWrong">只清除全部錯題</button><button class="reset-button danger" id="clearAll">清除呢位小朋友全部紀錄</button></div></div>
+      <p class="parent-status" id="parentStatus"></p>
+    </div>
+  </dialog>
+
+  <script>
+    const STORAGE_KEY='chineseLearningGamesV2';
+    const profileNames={elder:'哥哥',younger:'細佬'};
+    const gameNames={listen:'聽音認字',read:'閱讀理解',sentence:'重組句子',write:'寫字練習'};
+    const questions={
+      listen:[
+        {id:'listen-word-rain',kind:'word',icon:'🌧️',speak:'雨',prompt:'聽一聽，揀出正確嘅字。',answers:['雨','雪','風','雲'],correct:'雨'},
+        {id:'listen-word-tree',kind:'word',icon:'🌳',speak:'樹',prompt:'聽一聽，揀出正確嘅字。',answers:['花','草','樹','葉'],correct:'樹'},
+        {id:'listen-phrase-school',kind:'phrase',icon:'🏫',speak:'返學',prompt:'聽一聽，揀出正確嘅詞語。',answers:['放學','返學','上車','回家'],correct:'返學'},
+        {id:'listen-phrase-eat',kind:'phrase',icon:'🍚',speak:'食飯',prompt:'聽一聽，揀出正確嘅詞語。',answers:['飲水','食飯','洗手','刷牙'],correct:'食飯'}
+      ],
+      read:[
+        {id:'read-cat',icon:'🐱',prompt:'小貓瞓喺梳化上面。小貓喺邊度？',answers:['床上','梳化上','枱底','門口'],correct:'梳化上'},
+        {id:'read-park',icon:'🛝',prompt:'星期日，我同爸爸去公園玩。邊個同我去公園？',answers:['哥哥','老師','爸爸','同學'],correct:'爸爸'},
+        {id:'read-apple',icon:'🍎',prompt:'妹妹鍾意食紅色嘅蘋果。蘋果係咩顏色？',answers:['黃色','綠色','藍色','紅色'],correct:'紅色'}
+      ],
+      sentence:[
+        {id:'sentence-bird',icon:'🐦',prompt:'邊一句最通順？',answers:['小鳥在天上飛。','天上小鳥飛在。','飛在小鳥天上。','在飛天上小鳥。'],correct:'小鳥在天上飛。'},
+        {id:'sentence-school',icon:'🎒',prompt:'邊一句最通順？',answers:['我每天準時上學。','每天上學我準時。','上學準時每天我。','準時我上學每天。'],correct:'我每天準時上學。'},
+        {id:'sentence-book',icon:'📚',prompt:'邊一句最通順？',answers:['圖書館我去看書。','我去圖書館看書。','看書去我圖書館。','去看書圖書館我。'],correct:'我去圖書館看書。'}
+      ],
+      write:[
+        {id:'write-sun',icon:'☀️',prompt:'跟住字形寫三次',trace:'日',answers:[],correct:'完成'},
+        {id:'write-moon',icon:'🌙',prompt:'跟住字形寫三次',trace:'月',answers:[],correct:'完成'},
+        {id:'write-mountain',icon:'⛰️',prompt:'跟住字形寫三次',trace:'山',answers:[],correct:'完成'}
+      ]
+    };
+    const emptyProfile=()=>({wrong:{listen:[],read:[],sentence:[],write:[]},completed:{listen:0,read:0,sentence:0,write:0}});
+    let data=loadData();let activeProfile=data.activeProfile||null;let parentProfile='elder';let currentGame=null;let currentMode='all';let listenMode='word';let queue=[];let questionIndex=0;let answered=false;let holdTimer;
+
+    function loadData(){try{const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));return saved&&saved.profiles?saved:{activeProfile:null,profiles:{elder:emptyProfile(),younger:emptyProfile()}}}catch{return{activeProfile:null,profiles:{elder:emptyProfile(),younger:emptyProfile()}}}}
+    function saveData(){data.activeProfile=activeProfile;localStorage.setItem(STORAGE_KEY,JSON.stringify(data))}
+    function profileData(id=activeProfile){return data.profiles[id]||(data.profiles[id]=emptyProfile())}
+    function setProfile(id){activeProfile=id;document.querySelectorAll('.profile').forEach(button=>button.classList.toggle('active',button.dataset.profile===id));document.getElementById('welcomeTitle').textContent=`${profileNames[id]}，今日想玩邊樣？`;document.getElementById('welcomeText').textContent='你嘅進度同錯題會獨立保存。';saveData();updateBadges()}
+    function updateBadges(){document.querySelectorAll('[data-badge]').forEach(badge=>{const count=activeProfile?profileData().wrong[badge.dataset.badge].length:0;badge.textContent=`錯題 ${count}`})}
+    function wrongIds(game=currentGame){return profileData().wrong[game]}
+    function addWrong(id){const list=wrongIds();if(!list.includes(id))list.push(id);saveData()}
+    function removeWrong(id){profileData().wrong[currentGame]=wrongIds().filter(item=>item!==id);saveData()}
+    function startGame(game){if(!activeProfile){document.getElementById('welcomeTitle').textContent='請先揀哥哥或者細佬 👆';document.querySelector('.panel').scrollIntoView({behavior:'smooth'});return}currentGame=game;currentMode='all';questionIndex=0;listenMode='word';document.getElementById('homeScreen').classList.add('hidden');document.getElementById('gameScreen').classList.remove('hidden');document.getElementById('gameTitle').textContent=gameNames[game];document.getElementById('gameSubtitle').textContent=`${profileNames[activeProfile]}嘅獨立練習`;document.querySelectorAll('[data-mode]').forEach(button=>button.classList.toggle('active',button.dataset.mode==='all'));const listening=game==='listen';document.getElementById('wordMode').classList.toggle('hidden',!listening);document.getElementById('phraseMode').classList.toggle('hidden',!listening);document.getElementById('wordMode').classList.toggle('active',listening);document.getElementById('phraseMode').classList.remove('active');buildQueue();renderQuestion();window.scrollTo({top:0,behavior:'smooth'})}
+    function buildQueue(){let list=[...questions[currentGame]];if(currentGame==='listen')list=list.filter(q=>q.kind===listenMode);if(currentMode==='wrong')list=list.filter(q=>wrongIds().includes(q.id));queue=list;questionIndex=0}
+    function renderQuestion(){answered=false;const card=document.getElementById('questionCard');if(queue.length===0){card.innerHTML=`<span class="prompt-icon">🎉</span><p class="prompt">而家冇錯題要重練！</p><p>完成其他題目後，答錯嘅題目會喺呢度出現。</p>`;return}const q=queue[questionIndex%queue.length];if(currentGame==='write'){card.innerHTML=`<span class="prompt-icon">${q.icon}</span><p class="prompt">${q.prompt}</p><div class="trace">${q.trace}　${q.trace}　${q.trace}</div><p>用紙同筆，慢慢跟住寫。</p><button class="next" id="completeWriting">我寫完喇 ✓</button><p class="feedback" id="feedback"></p>`;document.getElementById('completeWriting').onclick=()=>finishWriting(q);return}const speakButton=currentGame==='listen'?`<button class="speak" id="speakButton">🔊 播放讀音</button>`:'';card.innerHTML=`<span class="prompt-icon">${q.icon}</span><p class="prompt">${q.prompt}</p>${speakButton}<div class="answers">${q.answers.map(a=>`<button class="answer" data-answer="${a.replaceAll('"','&quot;')}">${a}</button>`).join('')}</div><p class="feedback" id="feedback"></p><button class="next hidden" id="nextButton">下一題 →</button>`;if(currentGame==='listen'){document.getElementById('speakButton').onclick=()=>speak(q.speak);setTimeout(()=>speak(q.speak),250)}document.querySelectorAll('.answer').forEach(button=>button.onclick=()=>checkAnswer(button,q));document.getElementById('nextButton').onclick=nextQuestion}
+    function speak(text){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(text);utterance.lang='zh-HK';utterance.rate=.78;speechSynthesis.speak(utterance)}
+    function checkAnswer(button,q){if(answered)return;answered=true;const correct=button.dataset.answer===q.correct;document.querySelectorAll('.answer').forEach(item=>{item.disabled=true;if(item.dataset.answer===q.correct)item.classList.add('correct')});if(correct){removeWrong(q.id);document.getElementById('feedback').textContent='答啱喇！做得好 🌟'}else{button.classList.add('wrong');addWrong(q.id);document.getElementById('feedback').textContent='差少少，記低咗下次再練 💪'}profileData().completed[currentGame]+=1;saveData();document.getElementById('nextButton').classList.remove('hidden');updateBadges()}
+    function finishWriting(q){if(answered)return;answered=true;removeWrong(q.id);profileData().completed.write+=1;saveData();document.getElementById('feedback').textContent='完成！慢慢寫就會越寫越靚 🌟';document.getElementById('completeWriting').textContent='下一個字 →';document.getElementById('completeWriting').onclick=nextQuestion}
+    function nextQuestion(){questionIndex=(questionIndex+1)%queue.length;renderQuestion()}
+    function returnHome(){document.getElementById('gameScreen').classList.add('hidden');document.getElementById('homeScreen').classList.remove('hidden');updateBadges();window.scrollTo({top:0,behavior:'smooth'})}
+
+    document.querySelectorAll('.profile').forEach(button=>button.onclick=()=>setProfile(button.dataset.profile));
+    document.querySelectorAll('.game').forEach(button=>button.onclick=()=>startGame(button.dataset.game));
+    document.getElementById('backButton').onclick=returnHome;
+    document.querySelectorAll('[data-mode]').forEach(button=>button.onclick=()=>{currentMode=button.dataset.mode;document.querySelectorAll('[data-mode]').forEach(item=>item.classList.toggle('active',item===button));buildQueue();renderQuestion()});
+    document.querySelectorAll('[data-listen-mode]').forEach(button=>button.onclick=()=>{listenMode=button.dataset.listenMode;document.querySelectorAll('[data-listen-mode]').forEach(item=>item.classList.toggle('active',item===button));buildQueue();renderQuestion()});
+
+    function openParent(){parentProfile=activeProfile||'elder';document.querySelectorAll('[data-parent-profile]').forEach(button=>button.classList.toggle('active',button.dataset.parentProfile===parentProfile));renderParent();document.getElementById('parentDialog').showModal()}
+    function renderParent(){const state=profileData(parentProfile);document.getElementById('parentSummary').innerHTML=Object.entries(gameNames).map(([id,name])=>`<div class="summary-item">${name}<span>完成 ${state.completed[id]} 次 · 錯題 ${state.wrong[id].length} 題</span></div>`).join('');document.getElementById('gameResetButtons').innerHTML=Object.entries(gameNames).map(([id,name])=>`<button class="reset-button" data-reset-game="${id}">重設「${name}」</button>`).join('');document.querySelectorAll('[data-reset-game]').forEach(button=>button.onclick=()=>resetGame(button.dataset.resetGame));document.getElementById('parentStatus').textContent=''}
+    function resetGame(game){const state=profileData(parentProfile);state.wrong[game]=[];state.completed[game]=0;saveData();renderParent();document.getElementById('parentStatus').textContent=`已重設${profileNames[parentProfile]}嘅「${gameNames[game]}」。`;updateBadges()}
+    const parentButton=document.getElementById('parentButton');
+    function startHold(event){event.preventDefault();holdTimer=setTimeout(openParent,2000)}
+    function cancelHold(){clearTimeout(holdTimer)}
+    parentButton.addEventListener('pointerdown',startHold);parentButton.addEventListener('pointerup',cancelHold);parentButton.addEventListener('pointerleave',cancelHold);parentButton.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();openParent()}});
+    document.getElementById('closeDialog').onclick=()=>document.getElementById('parentDialog').close();
+    document.querySelectorAll('[data-parent-profile]').forEach(button=>button.onclick=()=>{parentProfile=button.dataset.parentProfile;document.querySelectorAll('[data-parent-profile]').forEach(item=>item.classList.toggle('active',item===button));renderParent()});
+    document.getElementById('clearWrong').onclick=()=>{const state=profileData(parentProfile);Object.keys(gameNames).forEach(game=>state.wrong[game]=[]);saveData();renderParent();document.getElementById('parentStatus').textContent=`已清除${profileNames[parentProfile]}嘅全部錯題。`;updateBadges()};
+    document.getElementById('clearAll').onclick=()=>{if(!confirm(`確定清除${profileNames[parentProfile]}嘅全部進度同錯題？`))return;data.profiles[parentProfile]=emptyProfile();saveData();renderParent();document.getElementById('parentStatus').textContent=`已重新開始${profileNames[parentProfile]}嘅全部練習。`;updateBadges()};
+
+    if(activeProfile)setProfile(activeProfile);else updateBadges();
+  </script>
+</body>
+</html>
