@@ -184,7 +184,7 @@
     function returnHome(){document.getElementById('gameScreen').classList.add('hidden');document.getElementById('homeScreen').classList.remove('hidden');updateBadges();window.scrollTo({top:0,behavior:'smooth'})}
 
     document.querySelectorAll('.profile').forEach(button=>button.onclick=()=>setProfile(button.dataset.profile));
-    document.querySelectorAll('.game').forEach(button=>button.onclick=()=>startGame(button.dataset.game));
+    document.querySelectorAll('.game').forEach(button=>button.onclick=()=>{if(button.dataset.game==='listen'){if(!activeProfile){document.getElementById('welcomeTitle').textContent='請先揀哥哥或者細佬 👆';document.querySelector('.panel').scrollIntoView({behavior:'smooth'});return;}window.location.href='listening/?profile='+encodeURIComponent(activeProfile);return;}startGame(button.dataset.game)});
     document.querySelector('[data-game="read"]').onclick=()=>{
       if (!activeProfile) { startGame('read'); return; }
       location.assign(`reading/?profile=${activeProfile}`);
