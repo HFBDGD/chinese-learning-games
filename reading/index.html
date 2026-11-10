@@ -6,6 +6,15 @@
 .practice-nav a{color:var(--green);padding:12px 0;margin-right:auto}
 .practice-nav button{min-height:44px}
 .practice-nav .secondary[aria-pressed="true"]{background:var(--green);color:white}
+.levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}
+.level{display:grid;gap:5px;text-align:left;min-height:90px;padding:12px;border:1px solid #cbd7c3;border-radius:14px;background:#fffdf7;color:var(--ink)}
+.level[aria-pressed="true"]{border-color:var(--green);background:#e9efdf;box-shadow:inset 0 0 0 1px var(--green)}
+.level:disabled{opacity:1;background:#edece3;color:#56635a}
+.level span,.level-status{font-size:13px}
+.lesson .tick{display:block;color:var(--green)}
+.lesson .tick:empty{display:none}
+.finish p{margin:10px 0}
+@media(max-width:760px){#lessons{grid-template-columns:repeat(2,minmax(0,1fr))}}
 #parent-button{-webkit-touch-callout:none;user-select:none}
 #parent-dialog{max-width:min(440px,calc(100% - 32px));border:1px solid var(--line);border-radius:20px;padding:24px;color:var(--ink);background:#fffdf7}
 #parent-dialog::backdrop{background:#243e3970}
@@ -19,8 +28,9 @@
   <button class="secondary" id="review-wrong" type="button" aria-pressed="false"></button>
   <button class="small-button" id="parent-button" type="button" aria-label="家長設定，長按兩秒開啟">家長</button>
 </nav>
-<h1>讀一讀，慢慢搵答案。</h1><p>每日一篇小短文，陪你認字、讀句子、學答題。</p></div>
-<div class="layout"><aside id="lessons" aria-label="選擇短文"></aside><main id="main"></main></div><footer>長按中文字可以聽讀音 · 同爸爸媽媽一齊讀</footer>
+<h1>讀一讀，慢慢搵答案。</h1><p>每級有兩篇短文，答啱兩篇嘅所有題目，就可以去下一級。</p>
+<nav id="levels" class="levels" aria-label="選擇閱讀級別"></nav></div>
+<div class="layout"><aside id="lessons" aria-label="選擇短文"></aside><main id="main" tabindex="-1"></main></div><footer>長按中文字可以聽讀音 · 同爸爸媽媽一齊讀</footer>
 <dialog id="parent-dialog" aria-labelledby="parent-heading">
   <h2 id="parent-heading">家長設定</h2>
   <p id="parent-scope"></p>
@@ -29,4 +39,4 @@
     <button class="primary" id="parent-reset" type="button">重設閱讀紀錄</button>
   </form>
 </dialog>
-<script src="app.js"></script></body></html>
+<script src="app.js?v=levels"></script></body></html>
