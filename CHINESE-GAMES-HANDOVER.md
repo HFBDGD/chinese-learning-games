@@ -165,4 +165,3 @@ Commit：
 - `HFBDGD/chinese-learning-games`：目前的中文學習樂園主網站及四款內置示範遊戲。
 
 兩者是不同 Repository。除非任務明確要求同步，修改其中一個不代表另一個已更新。
-75:- 不要加入 API Key、Token、小朋友姓名、學校資料或其他私人資料。
