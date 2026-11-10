@@ -185,6 +185,10 @@
 
     document.querySelectorAll('.profile').forEach(button=>button.onclick=()=>setProfile(button.dataset.profile));
     document.querySelectorAll('.game').forEach(button=>button.onclick=()=>startGame(button.dataset.game));
+    document.querySelector('[data-game="read"]').onclick=()=>{
+      if (!activeProfile) { startGame('read'); return; }
+      location.assign(`reading/?profile=${activeProfile}`);
+    };
     document.querySelector('[data-game="sentence"]').onclick=()=>{
       if(!activeProfile){startGame('sentence');return}
       location.href='sentence/?profile='+activeProfile;
