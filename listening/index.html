@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F6F4EA">
+<title>小小聽音家｜聽音圈字</title>
+<style>
+:root { --pine:#265548; --ink:#243C35; --muted:#697D72; --page:#F6F4EA; --card:#FFFEFB; --line:#DCE4DB; --wash:#ECF2E8; --gold:#F5D47D; --wrong:#A43E39; --wrong-bg:#FCEDE9; --right:#246B47; --right-bg:#E6F3E6; }
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:var(--page); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"PingFang HK","Noto Sans TC",sans-serif; min-height:100dvh; }
+button,input,select { font:inherit; }
+button { cursor:pointer; -webkit-tap-highlight-color:transparent; }
+button:focus-visible,select:focus-visible,input:focus-visible { outline:3px solid #B9862A; outline-offset:3px; }
+[hidden] { display:none!important; }
+.shell { max-width:920px; margin:auto; padding:22px 20px 48px; }
+.top { display:flex; align-items:center; justify-content:space-between; gap:14px; padding-bottom:18px; }
+.brand { display:flex; align-items:center; gap:12px; }
+.mark { background:var(--pine); color:white; display:grid; place-items:center; width:50px; height:50px; border-radius:17px; font-family:serif; font-size:27px; font-weight:700; }
+.brand-title { font-size:22px; font-weight:750; letter-spacing:.03em; }
+.subtitle { font-size:12px; color:var(--muted); margin-top:3px; letter-spacing:.07em; }
+.pill { display:inline-block; background:#E3ECDC; border-radius:999px; padding:8px 13px; color:#436450; font-size:12px; white-space:nowrap; }
+.panel { background:var(--card); border:1px solid var(--line); border-radius:27px; box-shadow:0 12px 36px rgba(34,65,40,.045); overflow:hidden; }
+.home { padding:33px 36px 34px; }
+.eyebrow { color:#6F856E; font-size:12px; letter-spacing:.15em; font-weight:700; }
+h1 { font-size:clamp(30px,5vw,43px); margin:12px 0 12px; letter-spacing:.02em; font-weight:760; line-height:1.3; }
+.lead { color:var(--muted); font-size:16px; line-height:1.9; margin:0 0 25px; }
+.demo { display:flex; align-items:center; gap:12px; background:#EDF1E7; border-radius:17px; padding:16px 18px; margin-bottom:25px; font-size:16px; line-height:1.5; }
+.demo-symbol { font-size:31px; }
+.group-label { display:block; margin-bottom:10px; color:var(--ink); font-weight:700; font-size:15px; }
+.segment { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:11px; margin-bottom:23px; }
+.segment button { min-height:86px; background:#FFF; border:1.8px solid var(--line); border-radius:16px; text-align:left; padding:16px 17px; color:var(--ink); }
+.segment button.active { background:var(--wash); border:2px solid var(--pine); }
+.segment strong { font-size:20px; display:block; }
+.segment small { color:var(--muted); display:block; font-size:12px; margin-top:6px; line-height:1.5; }
+.count-group { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:26px; }
+.count-option { min-width:86px; padding:13px 17px; background:#FFF; border:1.8px solid var(--line); border-radius:12px; color:var(--ink); }
+.count-option.active { background:var(--wash); border-color:var(--pine); font-weight:750; }
+.count-option:disabled { opacity:.5; cursor:not-allowed; }
+#empty-wrong { background:#FFF3D7; border-radius:12px; padding:12px; margin:0 0 16px; color:#775b29; }
+.primary { background:var(--pine); border:0; color:#FFF; border-radius:15px; padding:16px 25px; font-size:17px; font-weight:750; min-height:58px; }
+.primary:disabled { opacity:.5; }
+.outline { background:white; border:1.5px solid var(--line); color:var(--pine); border-radius:13px; padding:12px 18px; min-height:48px; font-size:15px; font-weight:600; }
+.primary:active,.outline:active,.answer:active { transform:scale(.99); }
+.smallprint { color:var(--muted); font-size:13px; line-height:1.85; margin:14px 0 0; }
+.footer-note { text-align:center; font-size:12px; color:#819184; padding:21px; }
+.game-header { padding:23px 29px 18px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; gap:14px; }
+.game-header h2 { margin:6px 0 0; font-size:23px; }
+.score { font-size:14px; color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.track { height:7px; background:#E5EBE2; }
+.track>div { height:100%; background:#9BBF8E; border-radius:0 5px 5px 0; width:0; transition:width .2s ease; }
+.listen-area { padding:33px 28px 17px; text-align:center; }
+.headphones { font-size:32px; margin-bottom:9px; }
+.prompt { font-size:clamp(21px,3vw,27px); margin:0; font-weight:700; }
+.listen-hint { font-size:14px; color:var(--muted); margin:10px 0 21px; }
+.speaker { position:relative; margin:auto; background:var(--pine); border:none; color:white; border-radius:22px; min-width:215px; min-height:102px; padding:20px 26px; box-shadow:0 8px 22px rgba(22,67,47,.14); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:18px; font-weight:750; }
+.speaker .icon { width:32px; height:32px; }
+.speaker.playing { background:#3B7361; }
+.voice-notice { font-size:13px; line-height:1.7; color:#9B5C2C; margin:13px auto 0; max-width:540px; }
+.tiny-tools { display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:14px; padding:15px 0 0; font-size:14px; color:var(--muted); }
+.tiny-tools label { display:flex; align-items:center; gap:7px; }
+.tiny-tools select { background:white; border:1px solid var(--line); border-radius:10px; color:var(--ink); padding:6px 8px; }
+.answers-title { font-size:15px; font-weight:700; margin:3px 0 15px; }
+.answers-area { padding:0 28px 30px; }
+.answers { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:13px; }
+.answer { position:relative; display:flex; justify-content:center; align-items:center; min-height:129px; border:2px solid #DFE7DB; background:#FFF; color:var(--ink); border-radius:19px; font-size:clamp(46px,8vw,72px); font-weight:550; font-family:"Kaiti TC","STKaiti","PingFang HK",serif; padding:12px; line-height:1.3; overflow:hidden; }
+.answer.word { font-size:clamp(32px,6vw,57px); }
+.answer:not(:disabled):hover { border-color:#99B5A2; }
+.answer:disabled { opacity:1; cursor:default; }
+.answer.selected-right,.answer.reveal-right { border:3px solid var(--right); background:var(--right-bg); color:#205E3E; }
+.answer.selected-wrong { border:3px solid var(--wrong); background:var(--wrong-bg); color:#923B35; }
+.answer .feedback-mark { position:absolute; right:13px; top:9px; font-family:system-ui,sans-serif; font-size:20px; font-weight:800; }
+.feedback { margin-top:17px; border:1px solid var(--line); background:#F8F8F3; border-radius:16px; padding:18px 20px; line-height:1.75; }
+.feedback.good { background:var(--right-bg); border-color:#B9D9BC; }
+.feedback.bad { background:var(--wrong-bg); border-color:#EAD2CE; }
+.feedback-title { font-weight:800; font-size:20px; margin-bottom:2px; }
+.correct-text { font-size:17px; margin:4px 0 8px; }
+.correct-text strong { font-size:30px; margin-left:4px; }
+.feedback-actions { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:14px; }
+.feedback-actions .primary { min-height:51px; padding:12px 21px; }
+.quiz-bottom { border-top:1px solid var(--line); padding:18px 28px; display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--muted); font-size:13px; }
+.result { text-align:center; padding:35px 32px; }
+.result-icon { font-size:52px; }
+.result h2 { font-size:33px; margin:13px 0 7px; }
+.big-score { font-size:58px; font-weight:800; color:var(--pine); margin:12px 0 4px; line-height:1; }
+.big-score span { font-size:21px; color:var(--muted); }
+.result p { color:var(--muted); font-size:16px; line-height:1.8; }
+.missed-list { border-radius:15px; background:#F3F3EB; padding:17px; margin:25px 0; text-align:left; }
+.missed-list strong { display:block; margin-bottom:9px; }
+.chips { display:flex; gap:9px; flex-wrap:wrap; }
+.chip { font-size:23px; background:white; border:1px solid var(--line); padding:9px 13px; border-radius:11px; }
+.actions { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin:22px 0 0; }
+.details { margin-top:17px; font-size:13px; color:var(--muted); line-height:1.75; }
+.details summary { color:var(--pine); cursor:pointer; font-weight:650; }
+.details p { margin:10px 0; }
+@media(max-width:650px){.shell { padding:15px 13px 25px; }.mark { width:44px;height:44px;font-size:23px; }.brand-title { font-size:18px; }.subtitle { font-size:10px; }.pill {font-size:11px; padding:7px 10px;}.home {padding:25px 20px;}.game-header {padding:19px 18px 15px;}.game-header h2 {font-size:20px;}.listen-area {padding:23px 17px 13px;}.answers-area {padding:0 16px 22px;}.answer {min-height:118px;}.answers {gap:10px;}.quiz-bottom {padding:15px 17px;}.segment button {padding:12px 10px;min-height:78px;}.segment strong {font-size:17px;}.result {padding:27px 18px;}.speaker {min-height:96px;} }
+@media(prefers-reduced-motion:reduce) { * {transition:none!important;} }
+.hub-return{display:inline-block;margin:0 0 14px;padding:10px 15px;background:#fff;border:1px solid var(--line);border-radius:12px;color:var(--pine);text-decoration:none;font-weight:750}
+.parent-reset{margin-top:20px;padding:17px;border:1px solid var(--line);border-radius:15px;background:#fafbf7}
+.parent-reset h3{margin:0 0 9px;font-size:18px}.parent-reset p{line-height:1.65;color:var(--muted);font-size:14px}
+.parent-actions{display:flex;gap:9px;flex-wrap:wrap}.parent-actions button{min-height:46px}
+.parent-trigger{margin-top:17px;background:transparent;border:0;color:var(--muted);font-size:13px;padding:12px 4px;touch-action:manipulation}
+</style>
+</head>
+<body>
+<div class="shell"><a class="hub-return" href="../index.html">← 返回中文學習樂園</a>
+<header class="top"><div class="brand"><div class="mark" aria-hidden="true">聽</div><div><div class="brand-title">小小聽音家</div><div class="subtitle">廣東話 · 哥哥與細佬</div></div></div><span class="pill">聆聽練習</span></header>
+<main>
+<section id="home" class="panel home">
+<div class="eyebrow">遊戲三 · 雙班級考試練習</div>
+<h1>聽清楚，圈出啱嘅字。</h1>
+<p class="lead">好似老師讀字咁：先聽聲音，再喺四個答案入面揀啱嗰個。答完即刻知道啱定錯。</p>
+<div class="demo"><span class="demo-symbol" aria-hidden="true">🔊</span><span>聽 → 諗 → 圈答案 → 睇結果<br><small style="color:var(--muted)">唔使識讀題目，聽完就可以揀。</small></span></div>
+<label class="group-label">第一步：邊個小朋友做練習？</label>
+<div class="segment" aria-label="選擇班級">
+<button id="class-older" class="active" type="button" aria-pressed="true"><strong>哥哥</strong><small>小一預備班<br>2026 下學期考試</small></button>
+<button id="class-younger" type="button" aria-pressed="false"><strong>細佬</strong><small>苗苗班<br>2026 下學期考試</small></button>
+</div>
+<label class="group-label">第二步：今日想練邊種？</label>
+<div class="segment" aria-label="練習模式">
+<button id="mode-char" class="active" type="button" aria-pressed="true"><strong>認單字</strong><small>聽一個字 · 揀一個字<br><span id="char-total"></span></small></button>
+<button id="mode-word" type="button" aria-pressed="false"><strong>認詞語</strong><small>聽完整詞語 · 揀詞語<br><span id="word-total"></span></small></button>
+</div>
+<label class="group-label">第三步：做幾多題？</label>
+<div class="count-group" aria-label="題數">
+<button type="button" class="count-option active" data-count="10" aria-pressed="true">10 題</button>
+<button type="button" class="count-option" data-count="20" aria-pressed="false">20 題</button>
+<button type="button" class="count-option" data-count="all" aria-pressed="false">全部</button>
+<button type="button" class="count-option" data-count="wrong" aria-pressed="false">只做錯題 <span id="wrong-count">(0)</span></button>
+</div>
+<div id="empty-wrong" class="smallprint" role="status" hidden>暫時冇錯題記錄。先做一般練習，答錯嘅字就會自動記低。</div>
+<button id="start" type="button" class="primary">▶ 開始聽音</button>
+<p class="smallprint" id="pool-note"></p>
+<details class="details"><summary>家長資訊：錯題記錄、題庫同廣東話讀音</summary>
+<p>每個小朋友嘅「認單字」同「認詞語」錯題會分開儲存。同一輪練習隨機出題、不重複；答錯會加入錯題庫，之後答啱就會移除。只做錯題會練習目前仍未掌握嘅字。</p>
+<p>錯題資料只儲存喺目前使用嘅瀏覽器，唔會上傳。要保留記錄，請每次喺同一部 iPad、同一個 Safari 網站網址使用；私人瀏覽、清除網站資料或改用另一個檔案網址，可能令記錄無法保留。</p>
+<p>哥哥使用 23 個考試認讀詞語。細佬使用 36 個認讀詞語，另加 5 個寫字部分獨有詞語；數字部分暫時未加入呢個聽音題庫。</p>
+<p>朗讀使用 iPad 內置廣東話語音（zh-HK），如聲線未安裝，請喺 iPad 語音設定加入。個別多音字請家長先試聽；同音字（例如「風／蜂」、「羊／陽」、「衣／醫」）唔會同時放入同一題。</p>
+<p id="pool-list"></p>
+</details>
+<button id="parent-trigger" type="button" class="parent-trigger" aria-label="長按兩秒開啟家長錯題管理">🔒 家長（長按兩秒）</button>
+<div id="parent-reset" class="parent-reset" hidden>
+<h3>🔒 家長錯題管理</h3>
+<p id="parent-target">請確認要重設邊位小朋友嘅錯題。</p>
+<div class="parent-actions"><button type="button" class="outline" id="reset-category">清除目前類別錯題</button><button type="button" class="outline" id="reset-both">清除兩類錯題</button><button type="button" class="outline" id="close-parent">關閉</button></div>
+<p id="parent-status" role="status"></p>
+<p>要將聽音答題次數一併歸零，可返回中文學習樂園首頁嘅家長專區，重設「聽音認字」。</p>
+</div>
+</section>
+<section id="quiz" class="panel" hidden aria-live="off">
+<div class="game-header"><div><div class="eyebrow" id="mode-label">聽音圈字</div><h2 id="question-number">第 1 題 / 10 題</h2></div><div class="score" id="running-score">答啱 0 題</div></div>
+<div class="track" aria-label="練習進度"><div id="progress"></div></div>
+<div class="listen-area"><div class="headphones" aria-hidden="true">🎧</div><h3 class="prompt">聽吓老師讀咩字？</h3><p class="listen-hint">聽唔清楚，可以再撳幾次。</p>
+<button type="button" class="speaker" id="play" aria-label="播放聲音"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15 9a5 5 0 0 1 0 6"/><path d="M18 6a9 9 0 0 1 0 12"/></svg><span id="play-text">聽一聽</span></button>
+<div id="voice-note" class="voice-notice" role="status" aria-live="polite"></div>
+<div class="tiny-tools"><label>朗讀速度 <select id="speed"><option value="0.72">慢慢讀</option><option value="0.9">正常</option></select></label><span>點大喇叭可重播</span></div>
+</div>
+<div class="answers-area"><div class="answers-title">圈出正確答案</div><div class="answers" id="answers"></div><div id="feedback" hidden class="feedback" aria-live="polite"></div></div>
+<div class="quiz-bottom"><span>✨ 仔細聽，再慢慢揀。</span><button type="button" class="outline" id="home-btn">返回首頁</button></div>
+</section>
+<section id="results" class="panel result" hidden>
+<div class="result-icon" aria-hidden="true">🌟</div><div class="eyebrow">今日練習完成</div><h2>做得好，繼續加油！</h2><div class="big-score" id="final-score">0 <span>/ 10 題</span></div><p id="result-text">聽完、諗完、揀完，就係進步！</p>
+<div class="missed-list" id="missed-box" hidden><strong>今次答錯嘅字：</strong><div class="chips" id="missed-chips"></div></div>
+<p class="smallprint" id="saved-missed-status"></p><div class="actions"><button class="primary" id="retry-missed" type="button" hidden>再做錯題</button><button class="outline" id="restart" type="button">再玩一次</button><button class="outline" id="back-settings" type="button">返回選擇</button></div>
+</section>
+</main>
+<div class="footer-note">專為親子練習設計 · 不收集孩子個人資料</div>
+</div>
+<script>
+'use strict';
+const CLASS_DATA={
+ older:{label:'哥哥 · 小一預備班',read:['水塘','灌水','洗手','雨點','交通','汽車','輪船','飛機','安全','巴士','火車','電車','春風','種子','豆','苗','蝴蝶','蜜蜂','聖堂','耶穌','誕生','唱歌','禮物'],extra:[]},
+ younger:{label:'細佬 · 苗苗班',read:['冬天','冷','雪人','春天','暖','豆苗','陽光','消防員','醫生','爸爸','媽媽','天空','鳥','水裏','魚','地上','牛','羊','貓','狗','水','洗衣','洗手','飲水','下雨','雨衣','雨傘','交通工具','汽車','馬路','中秋節','月亮','月餅','聖誕節','聖誕老人','聖誕快樂'],extra:['中秋','老人','工具','水果','病人']}
+};
+const HOMOPHONE_GROUPS=[['風','蜂'],['羊','陽'],['衣','醫']];
+const STORAGE_KEY='chineseLearningGamesV2';
+const $=id=>document.getElementById(id);
+let selectedClass=(new URLSearchParams(location.search).get('profile')==='younger'?'younger':'older'),mode='char',count='10',queue=[],position=0,correct=0,wrong=[],answered=false,sessionClass='older',sessionMode='char',sessionWrongOnly=false;
+let mistakes=readSaved();
+function readRoot(){try{const d=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');return d&&typeof d==='object'&&!Array.isArray(d)?d:{}}catch{return {}}}
+function readSaved(){const d=readRoot(),out={};for(const [which,profile] of [['older','elder'],['younger','younger']]){const a=d.profiles?.[profile]?.wrong?.listen||[];out[which+'-char']=a.filter(x=>typeof x==='string'&&x.startsWith('char:')).map(x=>x.slice(5));out[which+'-word']=a.filter(x=>typeof x==='string'&&x.startsWith('word:')).map(x=>x.slice(5));}return out}
+function save(){try{const d=readRoot();d.profiles ||= {};for(const [which,profile] of [['older','elder'],['younger','younger']]){d.profiles[profile] ||= {};d.profiles[profile].wrong ||= {};d.profiles[profile].completed ||= {};d.profiles[profile].wrong.listen=[...new Set([...(mistakes[which+'-char']||[]).map(x=>'char:'+x),...(mistakes[which+'-word']||[]).map(x=>'word:'+x)])];}localStorage.setItem(STORAGE_KEY,JSON.stringify(d))}catch{}}
+function recordAttempt(which){try{const d=readRoot(),profile=which==='older'?'elder':'younger';d.profiles ||= {};d.profiles[profile] ||= {};d.profiles[profile].wrong ||= {};d.profiles[profile].completed ||= {};d.profiles[profile].completed.listen=(Number(d.profiles[profile].completed.listen)||0)+1;localStorage.setItem(STORAGE_KEY,JSON.stringify(d))}catch{}}
+function vocab(which=selectedClass){return [...new Set([...CLASS_DATA[which].read,...CLASS_DATA[which].extra])];}
+function pool(which=selectedClass,m=mode){return m==='char'?[...new Set([...vocab(which).join('')])]:vocab(which)}
+function key(which=selectedClass,m=mode){return which+'-'+m}
+function mistakeList(which=selectedClass,m=mode){const saved=mistakes[key(which,m)];const allowed=new Set(pool(which,m));return Array.isArray(saved)?[...new Set(saved)].filter(w=>allowed.has(w)):[]}
+function addMistake(which,m,value){const values=new Set(mistakeList(which,m));values.add(value);mistakes[key(which,m)]=[...values];save()}
+function clearMistake(which,m,value){mistakes[key(which,m)]=mistakeList(which,m).filter(x=>x!==value);save()}
+const shuffled=a=>{const copy=[...a];for(let i=copy.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[copy[i],copy[j]]=[copy[j],copy[i]]}return copy};
+const isHomophone=(a,b)=>mode==='char'&&HOMOPHONE_GROUPS.some(g=>g.includes(a)&&g.includes(b));
+function setView(v){for(const id of ['home','quiz','results'])$(id).hidden=id!==v;window.scrollTo(0,0)}
+function setClass(which){selectedClass=which;for(const c of ['older','younger']){const yes=c===which;$('class-'+c).classList.toggle('active',yes);$('class-'+c).setAttribute('aria-pressed',String(yes))}updateSetup();if(!$('parent-reset').hidden)updateParentTarget()}
+function setMode(m){mode=m;for(const x of ['char','word']){const yes=x===m;$('mode-'+x).classList.toggle('active',yes);$('mode-'+x).setAttribute('aria-pressed',String(yes))}updateSetup();if(!$('parent-reset').hidden)updateParentTarget()}
+function setCount(c){count=c;updateSetup()}
+function updateSetup(){const total=pool().length;const miss=mistakeList().length;
+ $('char-total').textContent=pool(selectedClass,'char').length+' 個不重複字';
+ $('word-total').textContent=vocab().length+' 個不重複詞語';
+ $('wrong-count').textContent='('+miss+')';
+ document.querySelectorAll('[data-count]').forEach(b=>{const yes=b.dataset.count===count;b.classList.toggle('active',yes);b.setAttribute('aria-pressed',String(yes))});
+ $('pool-note').textContent=CLASS_DATA[selectedClass].label+' · '+(mode==='char'?'單字':'詞語')+'題庫共 '+total+' 題。每輪隨機抽題，唔會重複。';
+ $('pool-list').textContent='本班認讀詞語：'+CLASS_DATA[selectedClass].read.join('、')+(CLASS_DATA[selectedClass].extra.length?'。寫字部分另加：'+CLASS_DATA[selectedClass].extra.join('、'):'')+'。';
+ $('empty-wrong').hidden=count!=='wrong'||miss>0;
+ $('start').disabled=count==='wrong'&&miss===0;
+ $('start').textContent=count==='wrong'?'▶ 開始錯題練習':'▶ 開始聽音';
+}
+function makeOptions(value){const choices=shuffled(pool(sessionClass,sessionMode).filter(w=>w!==value&&!isHomophone(w,value)));return shuffled([value,...choices.slice(0,3)])}
+function startGame(only=null){stopSpeak();sessionClass=selectedClass;sessionMode=mode;sessionWrongOnly=count==='wrong'||Array.isArray(only);
+ const choices=Array.isArray(only)?only:count==='wrong'?mistakeList():pool();
+ const available=new Set(pool(sessionClass,sessionMode));const randomized=shuffled([...new Set(choices)].filter(w=>available.has(w)));
+ if(!randomized.length){setView('home');setCount('wrong');return}
+ const limit=sessionWrongOnly||count==='all'?randomized.length:Math.min(Number(count),randomized.length);
+ queue=randomized.slice(0,limit).map(answer=>({answer,options:makeOptions(answer)}));position=0;correct=0;wrong=[];setView('quiz');showQuestion(true)
+}
+function showQuestion(autoplay){stopSpeak();answered=false;const q=queue[position];$('mode-label').textContent=CLASS_DATA[sessionClass].label+' · '+(sessionMode==='char'?'單字聆聽':'詞語聆聽')+(sessionWrongOnly?' · 錯題重練':'');
+ $('question-number').textContent=`第 ${position+1} 題 / ${queue.length} 題`;$('running-score').textContent=`答啱 ${correct} 題`;$('progress').style.width=`${100*position/queue.length}%`;$('feedback').hidden=true;$('feedback').innerHTML='';$('voice-note').textContent='';$('play-text').textContent='聽一聽';$('answers').innerHTML='';
+ for(const choice of q.options){const b=document.createElement('button');b.type='button';b.className='answer'+(sessionMode==='word'?' word':'');b.textContent=choice;b.setAttribute('aria-label',`選擇 ${choice}`);b.addEventListener('click',()=>choose(choice));$('answers').appendChild(b)}if(autoplay)playCurrent()
+}
+function choose(selected){if(answered)return;answered=true;const q=queue[position];const isCorrect=selected===q.answer;
+ if(isCorrect){correct++;clearMistake(sessionClass,sessionMode,q.answer)}else{wrong.push(q.answer);addMistake(sessionClass,sessionMode,q.answer)}recordAttempt(sessionClass);
+ const buttons=[...$('answers').children];for(const b of buttons){b.disabled=true;if(b.textContent===q.answer){b.classList.add(isCorrect?'selected-right':'reveal-right');const s=document.createElement('span');s.className='feedback-mark';s.textContent='✓';b.appendChild(s)}else if(b.textContent===selected){b.classList.add('selected-wrong');const s=document.createElement('span');s.className='feedback-mark';s.textContent='×';b.appendChild(s)}}
+ const area=$('feedback');area.className='feedback '+(isCorrect?'good':'bad');area.innerHTML='';const title=document.createElement('div');title.className='feedback-title';title.textContent=isCorrect?'✓ 答啱喇！':'再聽一聽，記住呢個字。';area.appendChild(title);
+ const label=document.createElement('div');label.className='correct-text';label.append('正確答案係：');const word=document.createElement('strong');word.textContent=q.answer;label.appendChild(word);area.appendChild(label);
+ const actions=document.createElement('div');actions.className='feedback-actions';const repeat=document.createElement('button');repeat.type='button';repeat.className='outline';repeat.textContent='🔊 聽正確答案';repeat.addEventListener('click',()=>speak(q.answer));actions.appendChild(repeat);
+ const next=document.createElement('button');next.type='button';next.className='primary';next.textContent=position===queue.length-1?'睇練習結果 →':'下一題 →';next.addEventListener('click',()=>{position++;if(position<queue.length)showQuestion(true);else showResults()});actions.appendChild(next);area.appendChild(actions);area.hidden=false;$('running-score').textContent=`答啱 ${correct} 題`;if(!isCorrect)speak(q.answer)
+}
+function showResults(){stopSpeak();setView('results');$('final-score').innerHTML=correct+` <span>/ ${queue.length} 題</span>`;$('progress').style.width='100%';$('result-text').textContent=wrong.length===0?'全部答啱！你聽得好仔細。':`今次有 ${wrong.length} 題未答啱，已經加入錯題庫，下次可以集中再練。`;
+ const missed=[...new Set(wrong)];$('missed-box').hidden=missed.length===0;$('missed-chips').innerHTML='';for(const x of missed){const span=document.createElement('span');span.className='chip';span.textContent=x;$('missed-chips').appendChild(span)}
+ const saved=mistakeList(sessionClass,sessionMode);$('saved-missed-status').textContent=CLASS_DATA[sessionClass].label+' · '+(sessionMode==='char'?'單字':'詞語')+'錯題庫：目前仲有 '+saved.length+' 題。答啱嘅字會由錯題庫移除。';$('retry-missed').hidden=saved.length===0;updateSetup()
+}
+function stopSpeak(){try{if('speechSynthesis'in window)window.speechSynthesis.cancel()}catch{}$('play').classList.remove('playing');$('play-text').textContent='聽一聽'}
+function findCantoneseVoice(){if(!('speechSynthesis'in window))return null;const v=window.speechSynthesis.getVoices();return v.find(x=>/^zh[-_]HK$/i.test(x.lang))||v.find(x=>/^yue/i.test(x.lang))||null}
+function speak(text){stopSpeak();if(!('speechSynthesis'in window)){$('voice-note').textContent='此瀏覽器唔支援朗讀。請用 iPad Safari 試。';return}
+ const voice=findCantoneseVoice();const utterance=new SpeechSynthesisUtterance(text);utterance.lang='zh-HK';if(voice)utterance.voice=voice;utterance.rate=Number($('speed').value);utterance.pitch=1.02;utterance.volume=1;
+ if(!voice)$('voice-note').textContent='未偵測到廣東話語音；正在嘗試使用系統 zh-HK 朗讀。若讀音唔啱，請先安裝廣東話聲音。';else $('voice-note').textContent='';
+ utterance.onstart=()=>{$('play').classList.add('playing');$('play-text').textContent='播緊聲音…'};
+ utterance.onend=()=>{$('play').classList.remove('playing');$('play-text').textContent='再聽一次'};
+ utterance.onerror=e=>{$('play').classList.remove('playing');$('play-text').textContent='重播聲音';if(e.error!=='canceled'&&e.error!=='interrupted')$('voice-note').textContent='播放失敗。請確認音量，並再按一次喇叭。'};
+ try{window.speechSynthesis.speak(utterance)}catch{$('voice-note').textContent='未能開始播放。請再按一次喇叭。'}
+}
+function playCurrent(){if(queue[position])speak(queue[position].answer)}
+$('class-older').addEventListener('click',()=>setClass('older'));
+$('class-younger').addEventListener('click',()=>setClass('younger'));
+$('mode-char').addEventListener('click',()=>setMode('char'));
+$('mode-word').addEventListener('click',()=>setMode('word'));
+document.querySelectorAll('[data-count]').forEach(b=>b.addEventListener('click',()=>setCount(b.dataset.count)));
+$('start').addEventListener('click',()=>startGame());
+$('play').addEventListener('click',playCurrent);
+$('home-btn').addEventListener('click',()=>{stopSpeak();setView('home');updateSetup()});
+$('restart').addEventListener('click',()=>{if(sessionWrongOnly){const remaining=mistakeList(sessionClass,sessionMode);selectedClass=sessionClass;mode=sessionMode;count='wrong';updateSetup();if(remaining.length)startGame(remaining);else{setView('home');setCount('all')}}else startGame()});
+$('back-settings').addEventListener('click',()=>{stopSpeak();setView('home');updateSetup()});
+$('retry-missed').addEventListener('click',()=>{selectedClass=sessionClass;mode=sessionMode;count='wrong';updateSetup();startGame(mistakeList(sessionClass,sessionMode))});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopSpeak()});
+if('speechSynthesis'in window)window.speechSynthesis.getVoices();
+function updateParentTarget(){$('parent-target').textContent=CLASS_DATA[selectedClass].label+' · '+(mode==='char'?'認單字':'認詞語')+'，目前有 '+mistakeList().length+' 題錯題。';}
+let parentHold=null;
+$('parent-trigger').addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;parentHold=setTimeout(()=>{$('parent-reset').hidden=false;updateParentTarget();$('parent-status').textContent='';},2000)});
+for(const eventName of ['pointerup','pointercancel','pointerleave'])$('parent-trigger').addEventListener(eventName,()=>clearTimeout(parentHold));
+$('parent-trigger').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('parent-reset').hidden=false;updateParentTarget();}});
+$('close-parent').addEventListener('click',()=>{$('parent-reset').hidden=true});
+function resetMistakes(both){const target=CLASS_DATA[selectedClass].label,category=mode==='char'?'認單字':'認詞語';if(!confirm('確定清除'+target+'嘅'+(both?'全部聽音':'「'+category+'」')+'錯題？'))return;
+ for(const k of (both?['char','word']:[mode]))mistakes[key(selectedClass,k)]=[];
+ save();updateSetup();updateParentTarget();$('parent-status').textContent='錯題紀錄已清除；其他遊戲及另一位小朋友嘅紀錄不受影響。';}
+$('reset-category').addEventListener('click',()=>resetMistakes(false));
+$('reset-both').addEventListener('click',()=>resetMistakes(true));
+setClass(selectedClass);
+</script>
+</body>
+</html>
